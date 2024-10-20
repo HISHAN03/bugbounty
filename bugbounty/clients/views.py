@@ -5,8 +5,8 @@ from .forms import UserCreationForm, LoginForm
 
 # Create your views here.
 # Home page
-def index(request):
-    return render(request, 'index.html')
+def home(request):
+    return render(request, 'home.html')
 
 # signup page
 def user_signup(request):
