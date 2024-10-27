@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Pending Organization Approvals</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Company Name</th>
+            <th>Company Type</th>
+            <th>Approve</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for org in pending_organizations %}
+        <tr>
+            <td>{{ org.company_name }}</td>
+            <td>{{ org.get_company_type_display }}</td>
+            <td>
+                <a href="{% url 'approve_organization' org.id %}">Approve</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -40,9 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'clients',
     'organization',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
+    'admin_app',
 ]
 
 MIDDLEWARE = [
@@ -53,7 +51,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'bugbounty.urls'
@@ -130,21 +127,22 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'
-# LOGOUT_REDIRECT_URL = '/login/'
+# LOGIN_URL = 'login'  # Redirect here for login
+# LOGIN_REDIRECT_URL = 'user_dashboard'  # Redirect here after login
+# LOGOUT_REDIRECT_URL = 'login'  # Redirect here after logout
 
 AUTHENTICATION_BACKENDS=[
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend', 
 ]
 
-SITE_ID=1
+# SITE_ID=1
 
-SOCIALACCOUNT_PROVIDERS={}
+# SOCIALACCOUNT_PROVIDERS={}
 
-EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 
-ACCOUNT_AUTHENTICATION_METHOD='email'
-ACCOUNT_EMAIL_VERIFICATION="none"
-ACCOUNT_EMAIL_REQUIRED=True
+# ACCOUNT_AUTHENTICATION_METHOD='email'
+# ACCOUNT_EMAIL_VERIFICATION="none"
+# ACCOUNT_EMAIL_REQUIRED=True
+
+AUTH_USER_MODEL = 'clients.User'
