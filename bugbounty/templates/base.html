@@ -1,0 +1,16 @@
+{% if user.is_authenticated %}
+    {% if user.user_type == 'USER' %}
+        <a href="{% url 'user_dashboard' %}">Dashboard</a>
+    {% elif user.user_type == 'ORGANIZATION' %}
+        {% if user.is_approved %}
+            <a href="{% url 'org_dashboard' %}">Dashboard</a>
+        {% else %}
+            <a href="{% url 'pending_approval' %}">Pending Approval</a>
+        {% endif %}
+    {% elif user.is_superuser %}
+        <a href="{% url 'admin_dashboard' %}">Admin Dashboard</a>
+    {% endif %}
+    <a href="{% url 'logout' %}">Logout</a>
+{% else %}
+    <a href="{% url 'login' %}">Login</a>
+{% endif %}

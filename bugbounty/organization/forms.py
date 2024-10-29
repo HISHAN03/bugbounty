@@ -1,13 +1,13 @@
 from django import forms
-from .models import User
+from .models import Organization
 
-class UserRegistrationForm(forms.ModelForm):
+class OrganizationRegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     confirm_password = forms.CharField(widget=forms.PasswordInput)
-
+    
     class Meta:
-        model = User
-        fields = ['username','email','password']
+        model = Organization
+        fields = ['company_name','company_website','email','password']
 
     def clean(self):
         cleaned_data = super().clean()
@@ -19,7 +19,8 @@ class UserRegistrationForm(forms.ModelForm):
 
         return cleaned_data
 
-class UserLoginForm(forms.Form):
+class OrganizationLoginForm(forms.Form):
     email = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput)
+
 
