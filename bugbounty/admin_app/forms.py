@@ -7,7 +7,7 @@ class AdminRegistrationForm(forms.ModelForm):
 
     class Meta:
         model=CustomAdmin
-        fields = ['email', 'name', 'password']
+        fields = ['email', 'username', 'password']
 
     def clean(self):
         cleaned_data = super().clean()

@@ -3,7 +3,7 @@ from django.contrib.auth.backends import BaseBackend
 from django.contrib.auth.hashers import check_password
 from clients.models import User
 from organization.models import Organization
-
+from admin_app.models import CustomAdmin
 class MultiUserModelBackend(BaseBackend):
     def authenticate(self, request, email=None, password=None, **kwargs):
         # Try to authenticate as a Client
@@ -22,6 +22,13 @@ class MultiUserModelBackend(BaseBackend):
         except Organization.DoesNotExist:
             pass
 
+        try:
+            admin = CustomAdmin.objects.get(email=email)
+            if check_password(password, client.password):
+                return client
+        except CustomAdmin.DoesNotExist:
+            pass
+
         return None
 
     def get_user(self, user_id):
@@ -36,3 +43,9 @@ class MultiUserModelBackend(BaseBackend):
             return Organization.objects.get(pk=user_id)
         except Organization.DoesNotExist:
             return None
+        
+        try:
+            return CustomAdmin.objects.get(pk=user_id)
+        except CustomAdmin.DoesNotExist:
+            return None
+    

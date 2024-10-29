@@ -7,9 +7,9 @@ def organization_registration(request):
     if request.method == 'POST':
         form = OrganizationRegistrationForm(request.POST)
         if form.is_valid():
-            user=form.save(commit=False)
-            user.password=make_password(form.cleaned_data["password"])
-            user.save()
+            org=form.save(commit=False)
+            org.password=form.cleaned_data["password"]
+            org.save()
             return redirect('organization_login')
     else:
         form = OrganizationRegistrationForm()
@@ -23,10 +23,11 @@ def organization_login(request):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             try:
-                user = Organization.objects.get(email=email)
-                if check_password(password, user.password):
+                org = Organization.objects.get(email=email)
+                if check_password(password, org.password):
+                    
                     # Log the user in (you can use session or any other method)
-                    request.session['user_id'] = user.id
+                    request.session['organization_id'] = org.id
                     return redirect('organization_dashboard')  # Redirect to a home page
                 else:
                     # Invalid password

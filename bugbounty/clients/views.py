@@ -8,7 +8,8 @@ def user_signup(request):
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             user=form.save(commit=False)
-            user.password=make_password(form.cleaned_data['password'])
+            raw_password=form.cleaned_data['password']
+
             user.save()
             return redirect('user_login')
     else:
@@ -45,4 +46,4 @@ def user_login(request):
     return render(request, 'user_login.html', {'form': form})
 
 def user_dashboard(request):
-    return render(request,'organization_dashboard.html')
+    return render(request,'user_dashboard.html')
