@@ -1,1 +1,15 @@
 <h1>admin dashboard</h1>
+
+<ol>
+    {% for request in approval_requests %}
+    <li>
+        {{request.company_name }}
+        {{request.company_website }}
+        <form action="{% url 'approve_organization' request.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Approve</button>
+        </form>
+
+    </li>
+    {% endfor %}
+</ol>

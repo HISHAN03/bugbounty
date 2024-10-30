@@ -5,3 +5,11 @@
     <button type="submit">LogIn</button>
 </form>
 <p>Don't have an Account<a href="{% url 'organization_signup' %}">Signup</a></p>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}

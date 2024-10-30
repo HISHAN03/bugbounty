@@ -1,13 +1,18 @@
-# decorators.py
-from django.http import HttpResponseForbidden
+from django.core.exceptions import PermissionDenied
+from django.shortcuts import redirect
 from functools import wraps
-from .utils import is_organization
 
-def organization_required(view_func):
+def org_required(view_func):
     """Decorator to restrict access to Organizations only."""
     @wraps(view_func)
     def _wrapped_view(request, *args, **kwargs):
-        if not is_organization(request.user):
-            return HttpResponseForbidden("You do not have permission to access this page.")
-        return view_func(request, *args, **kwargs)
+        org_id = request.session.get('organization_id')
+        user_type = request.session.get('user_type')
+
+        if org_id and user_type == 'organization':
+            return view_func(request, *args, **kwargs)
+        
+        # Redirect to login page if user isn't authenticated as 'organization'
+        return redirect('organization_login')
+
     return _wrapped_view

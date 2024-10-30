@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from .forms import AdminRegistrationForm,AdminLoginForm
 from .models import CustomAdmin
 from django.contrib.auth.hashers import make_password,check_password
-# Registration view for UserType1
+from organization.models import Organization
+from .decorators import admin_required
+
 def admin_signup(request):
     if request.method == 'POST':
         form = AdminRegistrationForm(request.POST)
@@ -23,21 +25,17 @@ def admin_login(request):
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            print(f"Email: {email}, Password: {password}")
 
             try:
                 user = CustomAdmin.objects.get(email=email)
-                print(f"Stored hashed password:{user.password}")
-                print(f"password match:{check_password(password,user.password)}")
                 
                 if check_password(password, user.password):
-                    
-                    # Log the user in (you can use session or any other method)
                     request.session['user_id'] = user.id
-                    return redirect('admin_dashboard')  # Redirect to a home page
+                    request.session['user_type']=user.user_type
+                    request.session.modified=True
+                    return redirect('admin_dashboard')  
                 else:
-                    print("Password is incorrect")
-                    # Invalid password
+                    
                     form.add_error(None, "Invalid email or password.")
             except CustomAdmin.DoesNotExist:
                 form.add_error(None, "Invalid email or password.")
@@ -45,5 +43,22 @@ def admin_login(request):
         form = AdminLoginForm()
     return render(request, 'admin_login.html', {'form': form})
 
+@admin_required
 def admin_dashboard(request):
-    return render(request,'admin_dashboard.html')
+    approval_requests=pending_requests()
+    context={
+        'approval_requests':approval_requests,
+    }
+    return render(request,'admin_dashboard.html',context)
+
+@admin_required
+def pending_requests():
+    approval_requests=Organization.objects.filter(is_approved=False)
+    return approval_requests
+
+@admin_required
+def approve_organization(request, org_id):
+    organization = get_object_or_404(Organization, id=org_id)
+    organization.is_approved = True
+    organization.save()
+    return redirect('admin_dashboard')
