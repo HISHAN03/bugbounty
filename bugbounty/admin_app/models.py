@@ -5,7 +5,7 @@ class CustomAdmin(models.Model):
     email = models.EmailField(unique=True)
     username=models.CharField(max_length=255,unique=True)
     password=models.CharField(max_length=128)
-    
+    user_type=models.CharField(max_length=20,default='admin')
     def save(self, *args, **kwargs):
         self.password = make_password(self.password)
         super().save(*args, **kwargs)

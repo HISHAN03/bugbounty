@@ -47,8 +47,8 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -153,11 +153,4 @@ AUTHENTICATION_BACKENDS=[
 # ACCOUNT_EMAIL_VERIFICATION="none"
 # ACCOUNT_EMAIL_REQUIRED=True
 
-
-# settings.py
-ORG_LOGIN_URL = 'organization_login'  # Default for organization users
-ORG_LOGIN_REDIRECT_URL = 'organization_dashboard'  # Redirect after successful login
-
-# You can define a different login URL for other user types if necessary
-CLIENT_LOGIN_URL = 'client_login'  # Example for a client app
-CLIENT_LOGIN_REDIRECT_URL = 'client_dashboard'  # Redirect after successful login for clients
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
