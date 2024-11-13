@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>My Bounties</h2>
+    {% if bounties %}
+        <ul>
+            {% for bounty in bounties %}
+                <li>
+                    <strong>{{ bounty.title }}</strong><br>
+                    <p>{{ bounty.description }}</p>
+                    <p>Status: {% if bounty.status %}Active{% else %}Closed{% endif %}</p>
+                    <p>Start Date: {{ bounty.start_date }}</p>
+                    <p>End Date: {{ bounty.end_date }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No bounties found for your organization.</p>
+    {% endif %}
+{% endblock %}

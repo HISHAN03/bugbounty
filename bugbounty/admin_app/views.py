@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from .forms import AdminRegistrationForm,AdminLoginForm
 from .models import CustomAdmin
+from clients.models import User
 from django.contrib.auth.hashers import make_password,check_password
 from organization.models import Organization
 from .decorators import admin_required
@@ -44,17 +45,13 @@ def admin_login(request):
     return render(request, 'admin_login.html', {'form': form})
 
 @admin_required
-def admin_dashboard(request):
-    approval_requests=pending_requests()
-    context={
-        'approval_requests':approval_requests,
-    }
-    return render(request,'admin_dashboard.html',context)
+def admin_dashboard(request): 
+    return render(request,'admin_dashboard.html')
 
 @admin_required
-def pending_requests():
+def pending_requests(request):
     approval_requests=Organization.objects.filter(is_approved=False)
-    return approval_requests
+    return render(request,'approval_requests.html',{'approval_requests':approval_requests})
 
 @admin_required
 def approve_organization(request, org_id):
@@ -62,3 +59,13 @@ def approve_organization(request, org_id):
     organization.is_approved = True
     organization.save()
     return redirect('admin_dashboard')
+
+@admin_required
+def users(request):
+    users=User.objects.all()
+    return render(request,'user_list.html',{'users':users})
+
+@admin_required
+def organizations(request):
+    orgs=Organization.objects.all()
+    return render(request,'organization_list.html',{'orgs':orgs})
