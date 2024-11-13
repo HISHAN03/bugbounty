@@ -16,8 +16,14 @@ class Organization(models.Model):
         return self.company_name
 
 class Bounty(models.Model):
+    # company=models.ForeignKey(Organization,related_name='bounties',on_delete=models.CASCADE,null=True)
     Title=models.CharField(max_length=255,blank=False)
     description=models.TextField()
+    min_reward = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True, help_text="Minimum reward amount")
+    max_reward = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True, help_text="Maximum reward amount")
     status=models.BooleanField(default=True)
     start_date=models.DateField()
     end_date=models.DateField()
+
+    def __str__(self):
+        return self.title

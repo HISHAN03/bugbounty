@@ -1,15 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    {% block style%}
+    {% endblock%}
+</head>
+<body>
+    
+
 <h1>admin dashboard</h1>
-
-<ol>
-    {% for request in approval_requests %}
-    <li>
-        {{request.company_name }}
-        {{request.company_website }}
-        <form action="{% url 'approve_organization' request.id %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Approve</button>
-        </form>
-
-    </li>
-    {% endfor %}
-</ol>
+<div class="">
+    <ul>
+    <li><a href="{% url 'user_list' %}">Users</a></li>
+    <li><a href="{% url 'orgs_list' %}">Organizations</a></li>
+    <li><a href="{% url 'approval_requests' %}">Pending Requests</a></li>
+</ul>
+    
+  </div>
+  {% block content %}
+  
+{% endblock %}
+</body>
