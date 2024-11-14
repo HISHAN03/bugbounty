@@ -1,19 +1,18 @@
 from django.db import models
 from django.contrib.auth.hashers import make_password, check_password
 
+    
 class Organization(models.Model):
-    company_name=models.CharField(max_length=255)
-    company_website=models.URLField(blank=True)
-    email=models.EmailField(unique=True)
-    password=models.CharField(max_length=128)
-    is_approved=models.BooleanField(default=False)
-    user_type=models.CharField(max_length=20,default='organization')
-    def save(self,*args,**kwargs):
-        self.password=make_password(self.password)
-        super().save(*args,**kwargs)
+    company_name = models.CharField(max_length=255)
+    company_website = models.URLField(blank=True)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=128)  # Store the password in plain text
+    is_approved = models.BooleanField(default=False)
+    user_type = models.CharField(max_length=20, default='organization')
 
     def __str__(self):
         return self.company_name
+
 
 class Bounty(models.Model):
     # company=models.ForeignKey(Organization,related_name='bounties',on_delete=models.CASCADE,null=True)

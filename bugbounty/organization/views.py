@@ -32,10 +32,11 @@ def organization_login(request):
                 org = Organization.objects.get(email=email)
                 
                 # Debugging output
-                print("Stored hashed password:", org.password)
-                print("Password check result:", check_password(password, org.password))
+                print("Stored password in database:", org.password)
+                print("Entered password:", password)
                 
-                if check_password(password, org.password):  # Check hashed password
+                # Directly compare passwords as plain text
+                if password == org.password:
                     if not org.is_approved:
                         messages.error(request, "Access denied. Please wait for admin approval.")
                         return redirect('organization_login')
@@ -53,7 +54,7 @@ def organization_login(request):
         form = OrganizationLoginForm()
     return render(request, 'organization_login.html', {'form': form})
 
+
 @org_required
 def organization_dashboard(request):
     return render(request,'organization_dashboard.html')
-
