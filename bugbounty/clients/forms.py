@@ -2,9 +2,25 @@ from django import forms
 from .models import User
 
 class UserRegistrationForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
-    confirm_password = forms.CharField(widget=forms.PasswordInput)
-
+    password = forms.CharField(widget=forms.PasswordInput(attrs={
+            'placeholder': 'Password',  # Add placeholder here
+            'class': 'input'         # Add your custom CSS class
+        }))
+    confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={
+            'placeholder': 'Confirm Password',  # Add placeholder here
+            'class': 'input'}))
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={
+            'placeholder': 'Email',  # Add placeholder here
+            'class': 'input'         # Add your custom CSS class
+        })
+    )
+    username = forms.CharField(
+        widget=forms.EmailInput(attrs={
+            'placeholder': 'username',  # Add placeholder here
+            'class': 'input'         # Add your custom CSS class
+        })
+    )
     class Meta:
         model = User
         fields = ['username','email','password']
