@@ -15,11 +15,11 @@ def org_required(view_func):
                 # Fetch the organization and attach it to the request
                 request.organization = Organization.objects.get(pk=org_id)
             except Organization.DoesNotExist:
-                return redirect('organization_login')  # Redirect if organization not found
+                return redirect('org_auth')  # Redirect if organization not found
             
             return view_func(request, *args, **kwargs)
         
         # Redirect to login page if user isn't authenticated as 'organization'
-        return redirect('organization_login')
+        return redirect('org_auth')
 
     return _wrapped_view

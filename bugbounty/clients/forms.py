@@ -16,7 +16,7 @@ class UserRegistrationForm(forms.ModelForm):
         })
     )
     username = forms.CharField(
-        widget=forms.EmailInput(attrs={
+        widget=forms.TextInput(attrs={
             'placeholder': 'username',  # Add placeholder here
             'class': 'input'         # Add your custom CSS class
         })

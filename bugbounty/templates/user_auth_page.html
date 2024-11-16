@@ -12,7 +12,7 @@
     <div class="container" id="container">
         <!-- Signup Form -->
         <div class="form-container sign-up-container">
-            <form method="POST" action="{% url 'user_signup' %}">
+            <form method="POST" action="{% url 'user_auth' %}">
                 {% csrf_token %}
                 <h1>Create Account</h1>
                 <div class="form-group">
@@ -21,20 +21,20 @@
                     {{ signup_form.password }}
                     {{signup_form.confirm_password}}
                 </div>
-                <button type="submit">Sign Up</button>
+                <button type="submit" name="action" value="signup" >Sign Up</button>
             </form>
         </div>
 
         <!-- Login Form -->
         <div class="form-container sign-in-container">
-            <form method="POST" action="{% url 'user_login' %}">
+            <form method="POST" action="{% url 'user_auth' %}">
                 {% csrf_token %}
                 <h1>Sign In</h1>
                 <div class="form-group">
                     {{ login_form.email }}
                     {{ login_form.password }}
                 </div>
-                <button type="submit" value="login">Sign In</button>
+                <button type="submit" name="action" value="login" >Sign In</button>
                 <!-- <a href="#">Forgot your password?</a> -->
             </form>
         </div>
