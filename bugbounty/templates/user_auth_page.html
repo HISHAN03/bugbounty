@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <script src="{% static 'js/login.js' %}" defer></script>
+    <title>Login & Signup</title>
+</head>
+<body>
+    <div class="container" id="container">
+        <!-- Signup Form -->
+        <div class="form-container sign-up-container">
+            <form method="POST" action="{% url 'user_signup' %}">
+                {% csrf_token %}
+                <h1>Create Account</h1>
+                <div class="form-group">
+                    {{ signup_form.username }}
+                    {{ signup_form.email }}
+                    {{ signup_form.password }}
+                    {{signup_form.confirm_password}}
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+
+        <!-- Login Form -->
+        <div class="form-container sign-in-container">
+            <form method="POST" action="{% url 'user_login' %}">
+                {% csrf_token %}
+                <h1>Sign In</h1>
+                <div class="form-group">
+                    {{ login_form.email }}
+                    {{ login_form.password }}
+                </div>
+                <button type="submit" value="login">Sign In</button>
+                <a href="#">Forgot your password?</a>
+            </form>
+        </div>
+
+        <!-- Overlay -->
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome Back!</h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <button class="ghost" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Enter your personal details and start your journey with us</p>
+                    <button class="ghost" id="signUp" value="signup">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
