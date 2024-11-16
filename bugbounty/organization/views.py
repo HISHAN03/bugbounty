@@ -54,6 +54,49 @@ def organization_login(request):
         form = OrganizationLoginForm()
     return render(request, 'organization_login.html', {'form': form})
 
+def org_auth(request):
+    if request.method=='POST':
+        login_form=OrganizationLoginForm()
+        signup_form=OrganizationRegistrationForm()
+        if 'login' in request.POST:
+            login_form=OrganizationLoginForm(request.POST)
+            if login_form.is_valid():
+                email = login_form.cleaned_data['email']
+                password = login_form.cleaned_data['password']
+                try:
+                    org = Organization.objects.get(email=email)
+                
+                # Debugging output
+                    print("Stored password in database:", org.password)
+                    print("Entered password:", password)
+                
+                # Directly compare passwords as plain text
+                    if password == org.password:
+                        if not org.is_approved:
+                            messages.error(request, "Access denied. Please wait for admin approval.")
+                            return redirect('organization_login')
+                        request.session['organization_id'] = org.id
+                        request.session['user_type'] = org.user_type
+                        request.session.modified = True
+                        return redirect('organization_dashboard')
+                
+                    else:
+                        login_form.add_error(None, "Invalid email or password.")
+                except Organization.DoesNotExist:
+                    login_form.add_error(None, "Invalid email or password.")
+                    
+                    
+        elif 'signup' in request.POST:
+            signup_form = OrganizationRegistrationForm(request.POST)
+            if signup_form.is_valid():
+                user = signup_form.save(commit=False)
+                user.save()
+                return redirect('user_login')
+    else:
+        login_form = OrganizationLoginForm()
+        signup_form = OrganizationRegistrationForm()
+    return render(request,'org_auth.html',{'login_form': login_form,
+        'signup_form': signup_form})
 
 @org_required
 def organization_dashboard(request):
