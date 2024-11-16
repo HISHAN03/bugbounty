@@ -1,0 +1,12 @@
+<ul>
+    {% for bounty in bounties %}
+    <li>
+        {{bounty.Title}}
+        {{bounty.description}}
+        {{bounty.url}}
+        {{bounty.status}}
+    </li>
+    {% endfor %}
+</ul>
+
+<button><a href="{% url 'create_bounty' %}">Create Bounty</a></button>

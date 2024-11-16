@@ -1,5 +1,5 @@
 from django import forms
-from .models import Organization
+from .models import Organization,Bounty
 
 class OrganizationRegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -23,3 +23,7 @@ class OrganizationLoginForm(forms.Form):
     email = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput)
 
+class BountyCreationForm(forms.ModelForm):
+    class Meta:
+        model = Bounty
+        fields = ['Title', 'description','url', 'min_reward', 'max_reward', 'start_date', 'end_date']
