@@ -1,0 +1,12 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/admin.css' %}">
+
+<div class="login">
+	<h1>Login</h1>
+    <form method="post">
+        {% csrf_token %}
+    	{{form.email}}
+    	{{form.password}}
+        <button type="submit" class="btn btn-primary btn-block btn-large">Login</button>
+    </form>
+</div>

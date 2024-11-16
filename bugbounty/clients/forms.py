@@ -34,6 +34,12 @@ class UserRegistrationForm(forms.ModelForm):
             self.add_error("confirm_password", "Passwords do not match.")
 
         return cleaned_data
+    
+    
+    
+    
+    
+    
 
 class UserLoginForm(forms.Form):
     email = forms.EmailField(

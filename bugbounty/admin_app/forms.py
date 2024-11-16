@@ -20,5 +20,15 @@ class AdminRegistrationForm(forms.ModelForm):
         return cleaned_data
 
 class AdminLoginForm(forms.Form):
-    email = forms.EmailField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={
+            'placeholder': 'Email',  # Add placeholder here
+            'class': 'input'         # Add your custom CSS class
+        })
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'placeholder': 'Password',  # Add placeholder here
+            'class': 'input'            # Add your custom CSS class
+        })
+    )

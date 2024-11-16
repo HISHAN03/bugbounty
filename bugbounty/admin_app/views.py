@@ -26,6 +26,7 @@ def admin_login(request):
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
+            print("eee")
 
             try:
                 user = CustomAdmin.objects.get(email=email)
@@ -42,7 +43,8 @@ def admin_login(request):
                 form.add_error(None, "Invalid email or password.")
     else:
         form = AdminLoginForm()
-    return render(request, 'admin_login.html', {'form': form})
+    return render(request, 'admin_auth.html', {'form': form})
+
 
 @admin_required
 def admin_dashboard(request): 
