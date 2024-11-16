@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'clients',
     'organization',
     'admin_app',
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [

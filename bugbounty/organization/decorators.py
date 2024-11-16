@@ -1,6 +1,7 @@
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect
 from functools import wraps
+from .models import Organization  # Import your Organization model
 
 def org_required(view_func):
     """Decorator to restrict access to Organizations only."""
@@ -10,6 +11,12 @@ def org_required(view_func):
         user_type = request.session.get('user_type')
 
         if org_id and user_type == 'organization':
+            try:
+                # Fetch the organization and attach it to the request
+                request.organization = Organization.objects.get(pk=org_id)
+            except Organization.DoesNotExist:
+                return redirect('organization_login')  # Redirect if organization not found
+            
             return view_func(request, *args, **kwargs)
         
         # Redirect to login page if user isn't authenticated as 'organization'

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import OrganizationLoginForm,OrganizationRegistrationForm
-from .models import Organization
+from .forms import OrganizationLoginForm,OrganizationRegistrationForm,BountyCreationForm
+from .models import Organization,Bounty
 from django.contrib.auth.hashers import make_password,check_password
 from django.contrib.auth.decorators import login_required
 from .decorators import org_required
@@ -58,3 +58,24 @@ def organization_login(request):
 @org_required
 def organization_dashboard(request):
     return render(request,'organization_dashboard.html')
+
+@org_required
+def create_bounty(request):
+    if request.method == "POST":
+        form = BountyCreationForm(request.POST)
+        if form.is_valid():
+            bounty = form.save(commit=False)
+            print(bounty)
+            bounty.organization = request.organization  # Link bounty to the logged-in organization
+            bounty.save()
+            return redirect('Bounties')  # Redirect to a success page or bounty list
+    else:
+        form = BountyCreationForm()
+    return render(request, 'create_bounty.html', {'form': form})
+
+@org_required
+def bounties(request):
+    if request.method =='GET':
+        bounties=Bounty.objects.all()
+
+        return render(request,'org_bounties.html',{"bounties":bounties})

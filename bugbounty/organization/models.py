@@ -15,9 +15,10 @@ class Organization(models.Model):
 
 
 class Bounty(models.Model):
-    # company=models.ForeignKey(Organization,related_name='bounties',on_delete=models.CASCADE,null=True)
+    organization=models.ForeignKey(Organization,on_delete=models.CASCADE,related_name="bounties",null=True)
     Title=models.CharField(max_length=255,blank=False)
     description=models.TextField()
+    url=models.URLField(null=True)
     min_reward = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True, help_text="Minimum reward amount")
     max_reward = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True, help_text="Maximum reward amount")
     status=models.BooleanField(default=True)
@@ -25,4 +26,4 @@ class Bounty(models.Model):
     end_date=models.DateField()
 
     def __str__(self):
-        return self.title
+        return self.Title
