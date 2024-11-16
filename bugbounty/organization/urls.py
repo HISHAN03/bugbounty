@@ -6,5 +6,6 @@ urlpatterns = [
       path('login/',views.organization_login,name='organization_login'),
       path('dashboard/',views.organization_dashboard,name='organization_dashboard'),
       path('dashboard/Bounties',views.bounties,name='Bounties'),
+      path('auth/',views.org_auth,name='org_auth'),
       path('dashboard/Add-Bounty',views.create_bounty,name='create_bounty'),
 ]
