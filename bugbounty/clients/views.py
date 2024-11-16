@@ -42,8 +42,11 @@ def user_login(request):
                 form.add_error(None, "Invalid email or password.")
     else:
         form = UserLoginForm()
-    return render(request, 'user_login.html', {'form': form})
+    return render(request, 'login.html', {'form': form})
 
 @client_required
 def user_dashboard(request):
     return render(request,'user_dashboard.html')
+
+# def signup(request):
+#     return render(request,'login.html')
