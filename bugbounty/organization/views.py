@@ -103,7 +103,12 @@ def org_auth(request):
 
 @org_required
 def organization_dashboard(request):
-    return render(request,'organization_dashboard.html')
+    org=Organization.objects.get(id=request.session['organization_id'])
+    return render(request,'organization_dashboard.html',{'org':org})
+
+@org_required
+def add_bounty(request):
+    return render(request,'add_bounty.html')
 
 @org_required
 def create_bounty(request):
