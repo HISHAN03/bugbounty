@@ -10,6 +10,7 @@
   <title>Dashboard - Admin</title>
   <link rel="stylesheet" href="{% static 'css/org_dashboard.css' %}">
     <script src="{% static 'js/org_dashboard.js' %}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {% load bootstrap5 %}
   {% bootstrap_css %}
   {% bootstrap_javascript %}
@@ -662,51 +663,45 @@
    
    <ul id="sidenav-left" class="sidenav sidenav-fixed">
     <li>
-     <a href="/pages/admin-dashboard" class="logo-container"
-      >{{org.company_name}}<i class="material-icons left">spa</i></a
-     >
+      <a href="/pages/admin-dashboard" class="logo-container">
+        {{ org.company_name }}<i class="material-icons left">spa</i>
+      </a>
     </li>
     <li class="no-padding">
-     <ul class="collapsible collapsible-accordion">
-      <li class="bold waves-effect active">
-       <a class="collapsible-header"
-        >Programs<i class="material-icons chevron">chevron_left</i></a
-       >
-       <div class="collapsible-body">
-        <ul>
-         <li>
-          <a href="{% url 'add_bounty' %}" class="waves-effect active"
-           >Add bounties<i class="material-icons">web</i></a
-          >
-         </li>
-         <li>
-          <a href="/pages/admin-fixed-chart" class="waves-effect"
-           >Update bounties<i class="material-icons">list</i></a
-          >
-         </li>
-         <li>
-          <a href="/pages/admin-grid" class="waves-effect"
-           >Delete Bounties<i class="material-icons">dashboard</i></a
-          >
-         </li>
-         <li>
-          
-         </li>
-        </ul>
-       </div>
-      </li>
-
-  
-
- 
-
-    
-
-    
-
-     </ul>
+      <ul class="collapsible collapsible-accordion">
+        <li class="bold waves-effect active">
+          <a class="collapsible-header">Programs
+            <i class="material-icons chevron">chevron_left</i>
+          </a>
+          <div class="collapsible-body">
+            <ul>
+                <li>
+                    <a href="{% url 'Bounties' %}" class="waves-effect active" id="Bounties">Bounties
+                      <i class="material-icons">web</i>
+                    </a>
+                  </li>
+              <li>
+                <a href="{% url 'add_bounty' %}" class="waves-effect active" id="add_bounty">Add Bounty
+                  <i class="material-icons">web</i>
+                </a>
+              </li>
+              <li>
+                <a href="/pages/admin-fixed-chart" class="waves-effect">Update bounties
+                  <i class="material-icons">list</i>
+                </a>
+              </li>
+              <li>
+                <a href="/pages/admin-grid" class="waves-effect">Delete Bounties
+                  <i class="material-icons">dashboard</i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
     </li>
-   </ul>
+  </ul>
+  
 
    <div id="dropdown1" class="dropdown-content notifications">
     <div class="notifications-title">notifications</div>
@@ -802,6 +797,7 @@
   </header>
   <main>
     {% block content %}
+    <div id="dynamic-body">
    <div class="container">
     <div class="masonry row">
      <div class="col s12">
@@ -887,6 +883,7 @@
      
       </div>
      </div>
+    </div>
      {% endblock %}
     </div>
    </div>
@@ -970,5 +967,63 @@
 
   <!-- Initialization script -->
   <script src="//cdn.shopify.com/s/files/1/1775/8583/t/1/assets/dashboard.min.js?v=481680883062710906"></script>
- </body>
+  <script type="text/javascript">
+    var addBountyUrl = "{% url 'add_bounty' %}"; // Render the URL here
+    $(document).ready(function () {
+    // Add Bounty button click handler
+    $('#add_bounty').click(function (event) {
+        event.preventDefault(); // Prevent default link behavior
+
+        // AJAX request to load the add_bounty template dynamically
+        $.ajax({
+            url: addBountyUrl, // Use the variable containing the URL
+            type: 'GET',
+            success: function (data) {
+                // Inject the form HTML into the page
+                $('#dynamic-body').html(data); // Replace content of dynamic-body
+                $('#overlay').show(); // Show the modal overlay (if you have one)
+            },
+            error: function () {
+                alert('Failed to load the Add Bounty form.');
+            }
+        });
+    });
+
+    // Close modal logic
+    $(document).on('click', '#closeButton, #cancelButton', function () {
+        $('#overlay').hide(); // Hide the overlay when cancel/close is clicked
+    });
+});
+
+var BountiesUrl = "{% url 'Bounties' %}"; // Render the URL here
+    $(document).ready(function () {
+    // Add Bounty button click handler
+    $('#Bounties').click(function (event) {
+        event.preventDefault(); // Prevent default link behavior
+
+        // AJAX request to load the add_bounty template dynamically
+        $.ajax({
+            url: BountiesUrl, // Use the variable containing the URL
+            type: 'GET',
+            success: function (data) {
+                // Inject the form HTML into the page
+                $('#dynamic-body').html(data); // Replace content of dynamic-body
+                $('#overlay').show(); // Show the modal overlay (if you have one)
+            },
+            error: function () {
+                alert('Failed to load the Add Bounty form.');
+            }
+        });
+    });
+
+    // Close modal logic
+    $(document).on('click', '#closeButton, #cancelButton', function () {
+        $('#overlay').hide(); // Hide the overlay when cancel/close is clicked
+    });
+});
+
+</script>
+
+
+</body>
 </html>
