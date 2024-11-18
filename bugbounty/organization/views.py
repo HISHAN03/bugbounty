@@ -108,7 +108,18 @@ def organization_dashboard(request):
 
 @org_required
 def add_bounty(request):
-    return render(request,'add_bounty.html')
+    if request.method == "POST":
+        form = BountyCreationForm(request.POST)
+        if form.is_valid():
+            bounty = form.save(commit=False)
+            print(bounty)
+            bounty.organization = request.organization  # Link bounty to the logged-in organization
+            bounty.save()
+            return redirect('Bounties')  # Redirect to a success page or bounty list
+    else:
+        form = BountyCreationForm()
+    return render(request, 'add_bounty.html', {'form': form})
+    
 
 @org_required
 def create_bounty(request):
