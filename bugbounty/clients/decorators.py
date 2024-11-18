@@ -12,5 +12,5 @@ def client_required(view_func):
         if user_id and user_type == 'user':
             return view_func(request, *args, **kwargs)
              
-        return redirect('user_login')
+        return redirect('user_auth')
     return _wrapped_view
