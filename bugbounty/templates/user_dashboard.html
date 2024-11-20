@@ -1,0 +1,189 @@
+{% load static %}
+<html>
+
+<head>
+    <title>Bug Bounty Programs</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/user_dashboard.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="search-bar">
+            <input placeholder="Search" type="text" />
+            <div class="filters">
+                <select>
+                    <option>Scope type</option>
+                </select>
+                <select>
+                    <option>Max reward</option>
+                </select>
+                <button>+ Add filter</button>
+                <button>Reset</button>
+                <button>
+                    <i class="fas fa-sort"></i>
+                    SORT
+                </button>
+            </div>
+        </div>
+        <div class="programs">
+            <!-- Start of for loop -->
+            {% for bounty in bounties %}
+            <div class="program-card">
+                <!-- Common image -->
+                <img alt="Program logo" height="50"
+                    src="https://storage.googleapis.com/a1aa/image/EGOKVe7LtB3wKCDbOtIjeswIzGUwUsXw56vw3gDv1QHGW4yTA.jpg"
+                    width="50" />
+
+                <!-- Dynamic content -->
+                <h3>{{ bounty.Title }}</h3>
+                <!-- <p>{{ bounty.description }}</p> -->
+                <div class="tags">
+                    <span class="tag-blue">Bug bounty</span>
+                    <span class="tag-blue">Public</span>
+                    <span class="tag-red">
+                        {% if bounty.scopes %}{{ bounty.scopes|length }} scopes{% else %}No scopes{% endif %}
+                    </span>
+                </div>
+                <div class="details">
+                    <p>Status: <span>{% if bounty.status %}Active{% else %}Closed{% endif %}</span></p>
+                    <p>Start Date: <span>{{ bounty.start_date }}</span></p>
+                    <p>End Date: <span>{{ bounty.end_date }}</span></p>
+                </div>
+                <div class="view-button">
+                    <button>
+                        <i class="fas fa-eye"></i>
+                        View Program
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- End of for loop -->
+
+            <!-- <div class="program-card">
+                <img alt="Telenor Sweden logo" height="50"
+                    src="https://storage.googleapis.com/a1aa/image/EGOKVe7LtB3wKCDbOtIjeswIzGUwUsXw56vw3gDv1QHGW4yTA.jpg"
+                    width="50" />
+                <h3>
+                    TELENOR SWEDEN PUBLIC BUG BOUNTY PROGRAM
+                </h3>
+                <p>
+                    Telenor Sweden
+                </p>
+                <p>
+                    <img alt="Sweden flag" height="20"
+                        src="https://storage.googleapis.com/a1aa/image/LO25LogDzf2tAase1KL9Hoep1y7L6zeGwD25DWiow5nlYhLPB.jpg"
+                        width="20" />
+                    Media &amp; Entertainment
+                </p>
+                <div class="tags">
+                    <span class="tag-blue">
+                        Bug bounty
+                    </span>
+                    <span class="tag-blue">
+                        Public
+                    </span>
+                    <span class="tag-red">
+                        7 scopes
+                    </span>
+                </div>
+                <div class="details">
+                    <p>
+                        Reports
+                        <span>
+                            753
+                        </span>
+                    </p>
+                    <p>
+                        1st response
+                        <span>
+                            &lt; 1 DAY
+                        </span>
+                    </p>
+                    <p>
+                        Rewards
+                        <span>
+                            €50 - €4,000
+                        </span>
+                    </p>
+                </div>
+                <div class="view-button">
+                    <button>
+                        <i class="fas fa-eye">
+                        </i>
+                        View Program
+                    </button>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+       <div class="program-card">
+        <img alt="Telenor Sweden logo" height="50" src="https://storage.googleapis.com/a1aa/image/EGOKVe7LtB3wKCDbOtIjeswIzGUwUsXw56vw3gDv1QHGW4yTA.jpg" width="50"/>
+        <h3>
+         TELENOR SWEDEN PUBLIC BUG BOUNTY PROGRAM
+        </h3>
+        <p>
+         Telenor Sweden
+        </p>
+        <p>
+         <img alt="Sweden flag" height="20" src="https://storage.googleapis.com/a1aa/image/LO25LogDzf2tAase1KL9Hoep1y7L6zeGwD25DWiow5nlYhLPB.jpg" width="20"/>
+         Media &amp; Entertainment
+        </p>
+        <div class="tags">
+         <span class="tag-blue">
+          Bug bounty
+         </span>
+         <span class="tag-blue">
+          Public
+         </span>
+         <span class="tag-red">
+          7 scopes
+         </span>
+        </div>
+        <div class="details">
+         <p>
+          Reports
+          <span>
+           753
+          </span>
+         </p>
+         <p>
+          1st response
+          <span>
+           &lt; 1 DAY
+          </span>
+         </p>
+         <p>
+          Rewards
+          <span>
+           €50 - €4,000
+          </span>
+         </p>
+        </div>
+        <div class="view-button">
+         <button>
+          <i class="fas fa-eye">
+          </i>
+          View Program
+         </button>
+        </div>
+       </div>
+
+     -->

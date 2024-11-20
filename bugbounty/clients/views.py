@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import UserRegistrationForm, UserLoginForm
+from organization.models import Bounty
 from .models import User
 from django.contrib.auth.hashers import make_password,check_password
 from .decorators import client_required
@@ -91,7 +92,9 @@ def user_auth_page(request):
 
 @client_required
 def user_dashboard(request):
-    return render(request,'user_dashboard.html')
+    bounties = Bounty.objects.all()
+    return render(request, 'user_dashboard.html', {"bounties": bounties})
+
 
 # def signup(request):
 #     return render(request,'login.html')

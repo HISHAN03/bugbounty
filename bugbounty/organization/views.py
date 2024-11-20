@@ -122,6 +122,7 @@ def add_bounty(request):
     return render(request, 'add_bounty.html', {'form': form})
     
 
+
 # @org_required
 # def create_bounty(request):
 #     if request.method == "POST":
@@ -140,5 +141,4 @@ def add_bounty(request):
 def bounties(request):
     if request.method =='GET':
         bounties=Bounty.objects.filter(organization_id=request.session['organization_id'])
-
         return render(request,'org_bounties.html',{"bounties":bounties})
