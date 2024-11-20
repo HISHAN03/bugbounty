@@ -90,10 +90,23 @@ def user_auth_page(request):
     })
 
 
+# @client_required
+# def user_dashboard(request):
+#     bounties = Bounty.objects.all()
+#     return render(request, 'user_dashboard.html', {"bounties": bounties})
+
+
+
 @client_required
 def user_dashboard(request):
-    bounties = Bounty.objects.all()
-    return render(request, 'user_dashboard.html', {"bounties": bounties})
+    query = request.GET.get('q')  # Get the search query from the request
+    if query:
+        # Filter bounties by title containing the query (case-insensitive)
+        bounties = Bounty.objects.filter(Title__icontains=query)
+    else:
+        # If no query, show all bounties
+        bounties = Bounty.objects.all()
+    return render(request, 'user_dashboard.html', {'bounties': bounties})
 
 
 # def signup(request):

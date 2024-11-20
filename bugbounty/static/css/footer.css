@@ -1,0 +1,57 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+.footer {
+    position: absolute; /* If using the absolute positioning method */
+    bottom: 0;
+    width: 100%;
+    background-color: #f1f1f1; /* Optional: Footer background color */
+    border-top: 1px solid #ccc; /* Optional: Add a top border */
+    display: flex; /* Flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    padding: 15px; /* Add some padding */
+    text-align: center; /* Ensure text alignment */
+}
+.footer-content {
+    display: flex;
+    gap: 15px; /* Add spacing between links */
+    flex-wrap: wrap; /* Make links wrap on smaller screens */
+    padding: 20px;
+}
+.footer-content a {
+    color: #333;
+    text-decoration: none;
+    margin: 0 10px;
+    position: relative;
+}
+.footer-content a::after {
+    content: "";
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 14px;
+    background-color: #e0e0e0;
+}
+.footer-content a:last-child::after {
+    display: none;
+}
+.footer-content a:hover {
+    color: red;
+}
+.footer-content a:hover.underline {
+    text-decoration: underline;
+}
+.footer-content .external-link {
+    display: flex;
+    align-items: center;
+}
+.footer-content .external-link i {
+    margin-left: 5px;
+}
