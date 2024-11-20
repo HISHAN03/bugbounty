@@ -1,102 +1,333 @@
-{% load static %}
-<!DOCTYPE html>
 <html>
-<head>
-  <title>{% block title %}{% endblock %}</title>
-  {% load bootstrap5 %}
-  {% bootstrap_css %}
-  {% bootstrap_javascript %}
-  <link rel="stylesheet" href="{% static 'css/user_dashboard.css' %}">
-    <script src="{% static 'js/user_dashboard.js' %}" defer></script>
-</head>
-<body class="hero-anime">	
-
-	<div class="navigation-wrap bg-light start-header start-style">
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<nav class="navbar navbar-expand-md navbar-light">
-					
-						<a class="navbar-brand" href="{% url 'user_dashboard' %}" target="_blank"><img src="{% static 'images/eyeqdotnet.webp' %}" alt=""></a>	
-						
-						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						
-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
-							<ul class="navbar-nav ml-auto py-4 py-md-0">
-								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Home</a>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="#">Action</a>
-										<a class="dropdown-item" href="#">Another action</a>
-										<a class="dropdown-item" href="#">Something else here</a>
-										<a class="dropdown-item" href="#">Another action</a>
-									</div>
-								</li>
-								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link" href="#">Portfolio</a>
-								</li>
-								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link" href="#">Agency</a>
-								</li>
-								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Services</a>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="#">Action</a>
-										<a class="dropdown-item" href="#">Another action</a>
-										<a class="dropdown-item" href="#">Something else here</a>
-										<a class="dropdown-item" href="#">Another action</a>
-									</div>
-								</li>
-								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link" href="#">Journal</a>
-								</li>
-								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link" href="#">Contact</a>
-								</li>
-							</ul>
-						</div>
-						
-					</nav>		
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="section full-height">
-		<div class="absolute-center">
-			<div class="section">
-				<div class="container">
-					<div class="row">
-						<div class="col-12">
-				<h1><span>B</span><span>o</span><span>o</span><span>t</span><span>s</span><span>t</span><span>r</span><span>a</span><span>p</span> <span>4</span><br>
-				<span>m</span><span>e</span><span>n</span><span>u</span></h1>
-				<p>scroll for nav animation</p>	
-						</div>	
-					</div>		
-				</div>		
-			</div>
-			<div class="section mt-5">
-				<div class="container">
-					<div class="row">
-						<div class="col-12">
-							<div id="switch">
-								<div id="circle"></div>
-							</div>
-						</div>	
-					</div>		
-				</div>			
-			</div>
-		</div>
-	</div>
-	<div class="my-5 py-5">
-	</div>
-  
-<!-- Link to page
-================================================== -->
-
-	<!-- <a href="https://front.codes/" class="logo" target="_blank">
-		<img src="https://assets.codepen.io/1462889/fcy.png" alt="">
-	</a> -->
-
-</body>
+ <head>
+  <title>
+   Bug Bounty Programs
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            margin: 20px auto;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .search-bar input {
+            border: none;
+            outline: none;
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .search-bar i {
+            margin-right: 10px;
+            color: #888;
+        }
+        .filters {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .filters select, .filters button {
+            margin-right: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+            cursor: pointer;
+        }
+        .filters button {
+            background-color: #f5f5f5;
+        }
+        .filters .sort {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+        }
+        .filters .sort i {
+            margin-right: 5px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+            margin-right: 1.5%;
+        }
+        .card img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        .card .header {
+            display: flex;
+            align-items: center;
+        }
+        .card .header img {
+            margin-right: 10px;
+        }
+        .card .header h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        .card .header p {
+            margin: 0;
+            color: #888;
+        }
+        .card .tags {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .card .tags span {
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 5px;
+            font-size: 12px;
+        }
+        .card .tags .scopes {
+            background-color: #ff4d4d;
+        }
+        .card .details {
+            margin-top: 20px;
+        }
+        .card .details p {
+            margin: 5px 0;
+            color: #888;
+        }
+        .card .details .value {
+            font-weight: bold;
+            color: black;
+        }
+        .card .details .reward {
+            color: red;
+        }
+        .card .view-program {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-decoration: none;
+            display: block;
+        }
+        .cards-container {
+            display: flex;
+            justify-content: space-between;
+        }
+  </style>
+ </head>
+ <body>
+  <div class="container">
+   <div class="search-bar">
+    <i class="fas fa-search">
+    </i>
+    <input placeholder="Search" type="text"/>
+   </div>
+   <div class="filters">
+    <select>
+     <option>
+      Scope type
+     </option>
+    </select>
+    <select>
+     <option>
+      Max reward
+     </option>
+    </select>
+    <button>
+     Add filter
+    </button>
+    <button>
+     Reset
+    </button>
+    <div class="sort">
+     <i class="fas fa-sort">
+     </i>
+     <span>
+      SORT
+     </span>
+    </div>
+   </div>
+   <div class="cards-container">
+    <div class="card">
+     <div class="header">
+      <img alt="DataDome logo" height="50" src="https://storage.googleapis.com/a1aa/image/qpYekdhtYyUJT62uhONJ3SAV0yB6aBSyFOwqxLDr6EMSFb5JA.jpg" width="50"/>
+      <div>
+       <h3>
+        DATADOME BOT BOUNTY
+       </h3>
+       <p>
+        DataDome
+       </p>
+      </div>
+     </div>
+     <div class="tags">
+      <img alt="French flag" height="20" src="https://storage.googleapis.com/a1aa/image/yyAieerYoTqY8EunJd1d7rF6lFjiVBS4O4LpfTT4x5W5UslnA.jpg" width="20"/>
+      <span>
+       CyberSec
+      </span>
+      <span>
+       Bug bounty
+      </span>
+      <span>
+       Public
+      </span>
+      <span class="scopes">
+       6 scopes
+      </span>
+     </div>
+     <div class="details">
+      <p>
+       Reports
+      </p>
+      <p class="value">
+       27
+      </p>
+      <p>
+       1st response
+       <i class="fas fa-info-circle">
+       </i>
+      </p>
+      <p class="value">
+       &lt; 1 DAY
+      </p>
+      <p>
+       Rewards
+      </p>
+      <p class="reward">
+       €200 - €5,000
+      </p>
+     </div>
+     <a class="view-program" href="#">
+      View Program
+     </a>
+    </div>
+    <div class="card">
+     <div class="header">
+      <img alt="SNCF Connect logo" height="50" src="https://storage.googleapis.com/a1aa/image/Ith7jlF4p5ayMJ9cuZVIXfND4n2kB8Dtwydd55feJ0DDVslnA.jpg" width="50"/>
+      <div>
+       <h3>
+        BUG BOUNTY SNCF CONNECT
+       </h3>
+       <p>
+        SNCF Connect
+       </p>
+      </div>
+     </div>
+     <div class="tags">
+      <img alt="French flag" height="20" src="https://storage.googleapis.com/a1aa/image/yyAieerYoTqY8EunJd1d7rF6lFjiVBS4O4LpfTT4x5W5UslnA.jpg" width="20"/>
+      <span>
+       Other
+      </span>
+      <span>
+       Bug bounty
+      </span>
+      <span>
+       Public
+      </span>
+      <span class="scopes">
+       4 scopes
+      </span>
+     </div>
+     <div class="details">
+      <p>
+       Reports
+      </p>
+      <p class="value">
+       127
+      </p>
+      <p>
+       1st response
+       <i class="fas fa-info-circle">
+       </i>
+      </p>
+      <p class="value">
+       &lt; 1 DAY
+      </p>
+      <p>
+       Rewards
+      </p>
+      <p class="reward">
+       €0 - €10,000
+      </p>
+     </div>
+     <a class="view-program" href="#">
+      View Program
+     </a>
+    </div>
+    <div class="card">
+     <div class="header">
+      <img alt="DRACOON logo" height="50" src="https://storage.googleapis.com/a1aa/image/L7DHvwXD95JsJxbl5ihDU9ARnbkBXWRuH4XuTO4R9jPqit8E.jpg" width="50"/>
+      <div>
+       <h3>
+        DRACOON – BUG BOUNTY PROGRAM
+       </h3>
+       <p>
+        DRACOON
+       </p>
+      </div>
+     </div>
+     <div class="tags">
+      <img alt="German flag" height="20" src="https://storage.googleapis.com/a1aa/image/glk1C0HfwJwVUKTdKZWkXGD4028zONeBro7gZFjk4SlmK2yTA.jpg" width="20"/>
+      <span>
+       Tech - Other
+      </span>
+      <span>
+       Bug bounty
+      </span>
+      <span>
+       Public
+      </span>
+      <span class="scopes">
+       12 scopes
+      </span>
+     </div>
+     <div class="details">
+      <p>
+       Reports
+      </p>
+      <p class="value">
+       119
+      </p>
+      <p>
+       1st response
+       <i class="fas fa-info-circle">
+       </i>
+      </p>
+      <p class="value">
+       &lt; 1 DAY
+      </p>
+      <p>
+       Rewards
+      </p>
+      <p class="reward">
+       $1 - $5,000
+      </p>
+     </div>
+     <a class="view-program" href="#">
+      View Program
+     </a>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>

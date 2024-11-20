@@ -9,7 +9,7 @@
   
 </head>
 <body>
-    <section class="h-100 bg-light">
+    <!-- <section class="h-100 bg-light">
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col">
@@ -21,23 +21,100 @@
                       style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
                   </div>
                   <div class="col-xl-6">
-                    <div class="card-body p-md-5 text-black">
-                      <h3 class="mb-5 text-uppercase">Add Bounty</h3>
-                        <form method="post">
-                            {% csrf_token %}
+                    <div class="card-body p-md-5 text-black"> -->
+                      <h3 class="mt-5 mb-5 text-uppercase text-center">Add Bounty</h3>
+<form method="post" class="container" action="{% url 'add_bounty' %} >
+  {% csrf_token %}
+  
+  <div class="row mb-3">
+    <label for="title" class="form-label col-md-2 text-end">Title</label>
+    <div class="col-md-10">
+      {{ form.Title }}
+    </div>
+  </div>
+  
+  <div class="row mb-3">
+    <label for="description" class="form-label col-md-2 text-end">Description</label>
+    <div class="col-md-10">
+      {{ form.description }}
+    </div>
+  </div>
+  
+  <div class="row mb-3">
+    <label for="url" class="form-label col-md-2 text-end">URL</label>
+    <div class="col-md-10">
+      {{ form.url }}
+    </div>
+  </div>
+  
+  <div class="row mb-3">
+    <label for="start_date" class="form-label col-md-2 text-end">Start Date</label>
+    <div class="col-md-10">
+      {{ form.start_date }}
+    </div>
+  </div>
+  
+  <div class="row mb-3">
+    <label for="end_date" class="form-label col-md-2 text-end">End Date</label>
+    <div class="col-md-10">
+      {{ form.end_date }}
+    </div>
+  </div>
+  
+  <div class="row mb-3">
+    <label for="min_reward" class="form-label col-md-2 text-end">Minimum Reward</label>
+    <div class="col-md-10">
+      {{ form.min_reward }}
+    </div>
+  </div>
+  
+  <div class="row mb-3">
+    <label for="max_reward" class="form-label col-md-2 text-end">Maximum Reward</label>
+    <div class="col-md-10">
+      {{ form.max_reward }}
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</form>
+                   <!-- <form method="post">
+                            
                       <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="text" id="form3Example8" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Example8">Address</label>
+                        {{form.Title}}
+                        <label class="form-label" for="form3Example8">Title</label>
                       </div>
-                        <div class="col-md-6 mb-4">
-                          <div data-mdb-input-init class="form-outline">
-                            {{form.description}}
-                            <label class="form-label" for="form3Example1n">description</label>
-                          </div>
+                      <div data-mdb-input-init class="form-outline mb-4">
+                        {{form.description}}
+                        <label class="form-label" for="form3Example8">description</label>
+                      </div>
+                      <div data-mdb-input-init class="form-outline mb-4"></div>
+                        {{form.url}}
+                        <label class="form-label" for="form3Example8">url</label>
+                      </div>
+                      <div data-mdb-input-init class="form-outline mb-4"></div>
+                      {{form.start_date}}
+                      <label class="form-label" for="form3Example8">Start date</label>
+                    </div>
+                    <div data-mdb-input-init class="form-outline mb-4"></div>
+                      {{form.min_reward}}
+                      <label class="form-label" for="form3Example8">Minimum reward</label>
+                    </div>
+                    <div data-mdb-input-init class="form-outline mb-4"></div>
+                      {{form.max_reward}}
+                      <label class="form-label" for="form3Example8">Maximum reward</label>
+                    </div>
+                    <div data-mdb-input-init class="form-outline mb-4"></div>
+                      {{form.end_date}}
+                      <label class="form-label" for="form3Example8">End date</label>
+                    </div>
                         </div>
                       </div>
-      
-                      <div class="row">
+       -->
+                      <!-- <div class="row">
                         <div class="col-md-6 mb-4">
                           <div data-mdb-input-init class="form-outline">
                             {{form.url}}
@@ -55,9 +132,9 @@
                       <div data-mdb-input-init class="form-outline mb-4">
                         <input type="text" id="form3Example8" class="form-control form-control-lg" />
                         <label class="form-label" for="form3Example8">Address</label>
-                      </div>
+                      </div> -->
       
-                      <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                      <!-- <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
       
                         <h6 class="mb-0 me-4">Gender: </h6>
       
@@ -125,18 +202,18 @@
                       </div>
       
                       <div class="d-flex justify-content-end pt-3">
-                        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-light btn-lg">Reset all</button>
-                        <button  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-warning btn-lg ms-2">Submit form</button>
-                      </div>
-                    </form>
-                    </div>
+                        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-light btn-lg">Reset all</button> -->
+                        <!-- <button  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-warning btn-lg ms-2">Submit form</button>
+                      </div> -->
+                    <!-- </form> -->
+                    <!-- </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section> 
+      </section>  -->
 </body>
 <!-- <form method="post"></form>
     {% csrf_token %}

@@ -51,6 +51,48 @@ class OrganizationLoginForm(forms.Form):
     )
 
 class BountyCreationForm(forms.ModelForm):
+    Title = forms.CharField(
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Title',  # Add placeholder here
+            'class': 'form-control'         # Add your custom CSS class
+        })
+    )
+    description = forms.CharField(
+        widget=forms.TextInput(attrs={
+            'placeholder': 'description',  # Add placeholder here
+            'class': 'form-control'         # Add your custom CSS class
+        })
+    )
+    url = forms.URLField(
+        widget=forms.URLInput(attrs={
+            'placeholder': 'Url',  # Add placeholder here
+            'class': 'form-control'         # Add your custom CSS class
+        })
+    )
+    min_reward = forms.IntegerField(
+        widget=forms.NumberInput(attrs={
+            'placeholder': 'Minimum Reward',  # Add placeholder here
+            'class': 'form-control'         # Add your custom CSS class
+        })
+    )
+    max_reward = forms.IntegerField(
+        widget=forms.NumberInput(attrs={
+            'placeholder': 'Maximum Reward',  # Add placeholder here
+            'class': 'form-control'         # Add your custom CSS class
+        })
+    )
+    start_date = forms.DateField(
+        widget=forms.DateInput(attrs={
+            'placeholder': 'Start Date',  # Add placeholder here
+            'class': 'form-control'         # Add your custom CSS class
+        })
+    )
+    end_date = forms.DateField(
+        widget=forms.DateInput(attrs={
+            'placeholder': 'End date',  # Add placeholder here
+            'class': 'form-control'         # Add your custom CSS class
+        })
+    )
     class Meta:
         model = Bounty
         fields = ['Title', 'description','url', 'min_reward', 'max_reward', 'start_date', 'end_date']
