@@ -676,12 +676,12 @@
           <div class="collapsible-body">
             <ul>
                 <li>
-                    <a href="{% url 'Bounties' %}" class="waves-effect active" id="Bounties">Bounties
+                    <a href="{% url 'Bounties' %}" class="waves-effect " id="Bounties">Bounties
                       <i class="material-icons">web</i>
                     </a>
                   </li>
               <li>
-                <a href="{% url 'add_bounty' %}" class="waves-effect active" id="add_bounty">Add Bounty
+                <a href="{% url 'add_bounty' %}" class="waves-effect " id="add_bounty">Add Bounty
                   <i class="material-icons">web</i>
                 </a>
               </li>
@@ -808,12 +808,12 @@
        <div class="card-stacked">
         <div class="card-metrics card-metrics-static">
          <div class="card-metric">
-          <div class="card-metric-title">Revenue</div>
-          <div class="card-metric-value">$12,476.00</div>
-          <div class="card-metric-change increase">
+          <div class="card-metric-title">Bounties</div>
+          <div class="card-metric-value">{{bounties.count}}</div>
+          <!-- <div class="card-metric-change increase"> 
            <i class="material-icons left">keyboard_arrow_up</i>
            12%
-          </div>
+          </div> -->
          </div>
         </div>
        </div>

@@ -1,12 +1,41 @@
-<ul>
-    {% for bounty in bounties %}
-    <li>
-        {{bounty.Title}}
-        {{bounty.description}}
-        {{bounty.url}}
-        {{bounty.status}}
-    </li>
-    {% endfor %}
-</ul>
+{% load static %}
 
-<button><a href="{% url 'create_bounty' %}">Create Bounty</a></button>
+<link rel="stylesheet" href="{% static 'css/bounties.css' %}">
+<div class="container">
+    <table class="responsive-table">
+      <caption>Bounties</caption>
+      <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Status</th>
+          <!-- <th scope="col">Studio</th>
+          <th scope="col">Worldwide Gross</th>
+          <th scope="col">Domestic Gross</th>
+          <th scope="col">International Gross</th>
+          <th scope="col">Budget</th> -->
+        </tr>
+      </thead>
+      <!-- <tfoot>
+        <tr>
+          <td colspan="7">Sources: <a href="http://en.wikipedia.org/wiki/List_of_highest-grossing_animated_films" rel="external">Wikipedia</a> &amp; <a href="http://www.boxofficemojo.com/genres/chart/?id=animation.htm" rel="external">Box Office Mojo</a>. Data is current as of March 31, 2021.</td>
+        </tr>
+      </tfoot> -->
+      <tbody>
+        {% for bounty in bounties %}
+        <tr>
+          <th scope="row">{{bounty.Title}}</th>
+          {% if bounty.status == True %}
+          <td data-title="Status">Live</td>
+          {% else %}
+          <td data-title="Status">Closed</td>
+          {% endif %}
+          <!-- <td data-title="Studio">Disney</td>
+          <td data-title="Worldwide Gross" data-type="currency">$1,657,870,986</td>
+          <td data-title="Domestic Gross" data-type="currency">$543,638,043</td>
+          <td data-title="International Gross" data-type="currency">$1,114,232,943</td>
+          <td data-title="Budget" data-type="currency">$260,000,000</td> -->
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
