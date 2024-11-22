@@ -57,9 +57,7 @@ def pending_requests(request):
 
 @admin_required
 def approve_organization(request, org_id):
-    organization = get_object_or_404(Organization, id=org_id)
-    organization.is_approved = True
-    organization.save()
+    Organization.objects.filter(id=org_id).update(is_approved=True)
     return redirect('admin_dashboard')
 
 @admin_required
