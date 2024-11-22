@@ -114,3 +114,9 @@ def user_dashboard(request):
 
 def landing_page(request):
     return render(request,'landing_page.html')
+
+@client_required
+def program_detail(request, id):
+    bounty = Bounty.objects.filter(id__icontains=id)
+    return render(request, 'programs.html', {'bounties': bounty})
+ 

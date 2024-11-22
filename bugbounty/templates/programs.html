@@ -1,0 +1,80 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>Bug Bounty Program</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="stylesheet" href="{% static 'css/programs.css' %}">
+    
+</head>
+<body>
+    {% include 'navbar.html' %}
+    {% for bounty in bounties %}
+    <div class="container">
+        <div class="header">
+            <div>
+                <div class="tags">
+                    <div class="tag">Bug bounty</div>
+                    <div class="tag">Public</div>
+                    
+                </div>
+                <div class="title">{{ bounty.Title }}</div>
+                <div class="subtitle">Bug Bounty Post - Securing Digital Trust</div>
+            </div>
+            <div class="actions">
+                <button class="button">SUBMIT REPORT</button>
+                <!-- <a href="#" class="link">Bug bounty history</a> -->
+            </div>
+        </div>
+    </div>
+    <div class="reward-container">
+        <div class="reward">
+            <div class="title">REWARD</div>
+            <!-- <div class="tags">
+                <div class="tag">Bounty</div>
+                <div class="tag">Hall of fame</div>
+            </div> -->
+            <div class="bounties">
+                <div class="levels">
+                    <div class="level low">
+                        <div class="amount">€{{bounty.min_reward}}</div>
+                        <div>Low</div>
+                    </div>
+                    <!-- <div class="level medium">
+                        <div class="amount">€1,000</div>
+                        <div>Medium</div>
+                    </div> -->
+                    <div class="level high">
+                        <div class="amount">€{{bounty.max_reward}}</div>
+                        <div>High</div>
+                    </div>
+                    <!-- <div class="level critical">
+                        <div class="amount">€5,000</div>
+                        <div>Critical</div>
+                    </div>
+                    <div class="level critical">
+                        <div class="amount">€10,000</div>
+                        <div>Critical</div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="description">
+            <div class="title">Program description</div>
+            <!-- <div class="content1">
+                <p><strong>05.11.2024 UPDATE :</strong></p>
+                <p>We are happy to inform you that the scope has been updated for this program. Enjoy testing the new subdomains of *.post.ch!</p>
+                <p><strong>ABOUT THE PROGRAM</strong></p>
+                <p>Swiss Post - the world’s best postal service - stands for secure and trustworthy conveyance of information.</p>
+                <p>In order to meet the highest quality standards, we are constantly mitigating security issues on multiple levels.</p>
+            </div> -->
+            <div class="content1">
+                {{bounty.description}}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</body>
+</html>

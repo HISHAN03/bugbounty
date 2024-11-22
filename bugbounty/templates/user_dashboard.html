@@ -54,10 +54,12 @@
                     <p>End Date: <span>{{ bounty.end_date }}</span></p>
                 </div>
                 <div class="view-button">
-                    <button>
-                        <i class="fas fa-eye"></i>
-                        View Program
-                    </button>
+                    <a href="/user/programs/{{ bounty.id }}">
+                        <button>
+                            <i class="fas fa-eye"></i>
+                            View Program
+                        </button>
+                    </a>
                 </div>
             </div>
             {% endfor %}
