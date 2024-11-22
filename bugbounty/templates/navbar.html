@@ -1,0 +1,56 @@
+{% load static %}
+<html>
+    <head>
+        <title>
+            YesWeHack
+        </title>
+        <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+
+ </head>
+ <body>
+  <div class="navbar">
+   <div class="logo">
+    <img alt="eyeqdotnet logo" height="40" src="{% static 'images/eyeqlogo.webp' %}" width="34"/>
+   </div>
+   <div class="menu">
+    <a  href="#">
+     PUBLIC PROGRAMS
+    </a>
+    <a href="#">
+     LEADERBOARD
+    </a>
+    <a  class="active" href="#">
+     PRODUCTS
+    </a>
+    <a href="#">
+        HACKERS
+       </a>
+   </div>
+   <!-- <div class="theme-toggle">
+    <span>
+     Light
+    </span>
+    <div class="toggle-icons">
+     <i class="fas fa-toggle-on" style="color: #b30000;">
+     </i>
+     <i class="fas fa-toggle-off" style="color: grey;">
+     </i>
+    </div>
+    <span>
+     Dark
+     <small>
+      Beta
+     </small>
+    </span>
+   </div> -->
+   <div class="icon-buttons">
+    <i class="fas fa-bell">
+    </i>
+    <i class="fas fa-user-circle">
+    </i>
+   </div>
+  </div>
+
+ </body>
+</html>
