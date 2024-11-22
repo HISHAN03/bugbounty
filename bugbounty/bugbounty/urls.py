@@ -6,5 +6,6 @@ urlpatterns = [
     path('user/', include('clients.urls')),
     path('organization/', include('organization.urls')),
     path('admin/', include('admin_app.urls')),
-    path('',landing_page,name='landing_page')
+    path('',landing_page,name='landing_page'),
+    
 ]

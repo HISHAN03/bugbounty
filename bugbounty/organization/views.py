@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from .forms import OrganizationLoginForm,OrganizationRegistrationForm,BountyCreationForm
 from .models import Organization,Bounty
 from django.contrib.auth.hashers import make_password,check_password
@@ -73,7 +73,8 @@ def org_auth(request):
                     print("Entered password:", password)
                 
                 # Directly compare passwords as plain text
-                    if password == org.password:
+                    if check_password(password,org.password):
+                        print("valid")
                         if not org.is_approved:
                             messages.error(request, "Access denied. Please wait for admin approval.")
                             return redirect('org_auth')
@@ -84,6 +85,7 @@ def org_auth(request):
                 
                     else:
                         login_form.add_error(None, "Invalid email or password.")
+                        print("invalid")
                 except Organization.DoesNotExist:
                     login_form.add_error(None, "Invalid email or password.")
                     
@@ -116,7 +118,7 @@ def add_bounty(request):
             print(bounty)
             bounty.organization = request.organization  # Link bounty to the logged-in organization
             bounty.save()
-            return redirect('Bounties')  # Redirect to a success page or bounty list
+            return redirect('organization_dashboard')  # Redirect to a success page or bounty list
     else:
         form = BountyCreationForm()
     return render(request, 'add_bounty.html', {'form': form})
@@ -142,3 +144,9 @@ def bounties(request):
     if request.method =='GET':
         bounties=Bounty.objects.filter(organization_id=request.session['organization_id'])
         return render(request,'org_bounties.html',{"bounties":bounties})
+
+@org_required
+def program(request,slug):
+    if request.method=='GET':
+        program=get_object_or_404(Bounty,slug=slug)
+        return render(request,'program.html',{"program":program})
