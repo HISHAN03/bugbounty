@@ -8,5 +8,6 @@ urlpatterns = [
         path('approve_organization/<int:org_id>/', views.approve_organization, name='approve_organization'),
         path('dashboard/users/',views.users,name='user_list'),
         path('dashboard/approval_requests/',views.pending_requests,name='approval_requests'),
-        path('dashboard/organizations/',views.organizations,name='orgs_list')
+        path('dashboard/organizations/',views.organizations,name='orgs_list'),
+        path('admin_logout/', views.logout, name='admin_logout'),
 ]

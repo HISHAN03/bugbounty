@@ -5,7 +5,7 @@ from django.contrib.auth.hashers import make_password,check_password
 from django.contrib.auth.decorators import login_required
 from .decorators import org_required
 from django.contrib import messages
-
+from django.contrib.auth import logout as auth_logout
 # def organization_registration(request):
 #     if request.method == 'POST':
 #         form = OrganizationRegistrationForm(request.POST)
@@ -150,3 +150,8 @@ def program(request,slug):
     if request.method=='GET':
         program=get_object_or_404(Bounty,slug=slug)
         return render(request,'program.html',{"program":program})
+    
+@org_required
+def logout(request):
+    auth_logout(request)
+    return redirect('org_auth')

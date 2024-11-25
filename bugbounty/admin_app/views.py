@@ -5,6 +5,7 @@ from clients.models import User
 from django.contrib.auth.hashers import make_password,check_password
 from organization.models import Organization
 from .decorators import admin_required
+from django.contrib.auth import logout as auth_logout
 
 def admin_signup(request):
     if request.method == 'POST':
@@ -35,7 +36,7 @@ def admin_login(request):
                     request.session['user_id'] = user.id
                     request.session['user_type']=user.user_type
                     request.session.modified=True
-                    return redirect('admin_dashboard')  
+                    return redirect('user_list')  
                 else:
                     
                     form.add_error(None, "Invalid email or password.")
@@ -69,3 +70,8 @@ def users(request):
 def organizations(request):
     orgs=Organization.objects.all()
     return render(request,'organization_list.html',{'orgs':orgs})
+
+@admin_required
+def logout(request):
+    auth_logout(request)
+    return redirect('admin_login')

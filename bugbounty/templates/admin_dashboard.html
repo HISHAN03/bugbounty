@@ -1,25 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    {% block style%}
-    {% endblock%}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 </head>
-<body>
-    
+<body class="bg-gray-100">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-64 bg-gray-800 text-white h-screen fixed">
+            <div class="p-4">
+                <h1 class="text-2xl font-bold">EyeQDotNet</h1>
+            </div>
+            <nav class="mt-10">
+               
+                <a href="{% url 'user_list' %}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700"><i class="fas fa-users mr-2"></i> Users</a>
+                <a href="{% url 'orgs_list' %}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700"><i class="fas fa-cogs mr-2"></i> Organizations</a>
+                <a href="{% url 'approval_requests' %}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700"><i class="fas fa-chart-line mr-2"></i>New Requests</a>
+           
+              
+                <a href="{% url 'admin_logout' %}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700"><i class="fas fa-sign-out-alt mr-2"></i> Logout</a>
+            </nav>
+        </div>
 
-<h1>admin dashboard</h1>
-<div class="">
-    <ul>
-    <li><a href="{% url 'user_list' %}">Users</a></li>
-    <li><a href="{% url 'orgs_list' %}">Organizations</a></li>
-    <li><a href="{% url 'approval_requests' %}">Pending Requests</a></li>
-</ul>
-    
-  </div>
-  {% block content %}
-  
-{% endblock %}
+        <!-- Main content -->
+        <div class="flex-1 ml-64">
+            <!-- Top Navbar -->
+            <div class="bg-white shadow-md p-4 flex justify-between items-center">
+                <h1 class="text-xl font-bold">Dashboard</h1>
+            </div>
+            {% block content %}
+            <div class="p-6">
+              
+
+              
+            </div>
+            {% endblock %}
+        </div>
+    </div>
 </body>
+</html>
