@@ -9,5 +9,6 @@ urlpatterns = [
       path('auth/',views.org_auth,name='org_auth'),
       # path('dashboard/Add-Bounty',views.create_bounty,name='create_bounty'),
       path('dashboard/add_bounty',views.add_bounty,name='add_bounty'),
-      path('dashboard/program/<slug:slug>',views.program,name='program')
+      path('dashboard/program/<slug:slug>',views.program,name='program'),
+      path('logout/', views.logout, name='org_logout'),
 ]

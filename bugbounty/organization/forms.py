@@ -83,14 +83,16 @@ class BountyCreationForm(forms.ModelForm):
     )
     start_date = forms.DateField(
         widget=forms.DateInput(attrs={
-            'placeholder': 'Start Date',  # Add placeholder here
-            'class': 'form-control'         # Add your custom CSS class
-        })
+            'placeholder': 'Start Date',  
+            'class': 'form-control',
+            'type':'date',                      
+              })
     )
     end_date = forms.DateField(
         widget=forms.DateInput(attrs={
-            'placeholder': 'End date',  # Add placeholder here
-            'class': 'form-control'         # Add your custom CSS class
+            'placeholder': 'End date',  
+            'class': 'form-control',
+            'type':'date',         
         })
     )
     class Meta:
