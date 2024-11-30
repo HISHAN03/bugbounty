@@ -146,6 +146,12 @@ def bounties(request):
         return render(request,'org_bounties.html',{"bounties":bounties})
 
 @org_required
+def update_bounties(request):
+    if request.method =='GET':
+        bounties=Bounty.objects.filter(organization_id=request.session['organization_id'])
+        return render(request,'update_bounty.html',{"bounties":bounties})
+
+@org_required
 def program(request,slug):
     if request.method=='GET':
         program=get_object_or_404(Bounty,slug=slug)
