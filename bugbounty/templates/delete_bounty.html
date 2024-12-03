@@ -1,7 +1,7 @@
 <html>
  <head>
   <title>
-   Update Bounties
+   Delete Bounties
   </title>
   {% load bootstrap5 %}
   {% bootstrap_css %}
@@ -43,21 +43,29 @@
             color: #666;
         }
         .card-body .view-program {
-            color: #007bff;
+            color: #ff0000;
             text-decoration: none;
             font-weight: bold;
         }
         .card-body .view-program i {
             margin-right: 5px;
         }
+        .no-bounties-message {
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #666;
+        }
   </style>
  </head>
  <body>
   <div class="container">
    <h2 class="text-center mb-4">
-    Update Bounties
+    Delete Bounties
    </h2>
+   {% if bounties %}
    {% for bounty in bounties %}
+   
    <div class="card">
     <div class="card-body">
      <img alt="Logo of Organization 1" height="60" src="https://storage.googleapis.com/a1aa/image/koj5wdZMvOJnKhKNkNre3xiyOHrkQSK1fApaaXFcsoQvdfmnA.jpg" width="60"/>
@@ -69,15 +77,25 @@
        {{bounty.description}}
       </p>
      </div>
+     <form method="POST" action="{% url 'delete_bounty' %}">
+        {% csrf_token %}
+        <input type="hidden" name="bounty_id" value="{{bounty.id}}">
+        <button type="submit">
+        
+            <i class="fas fa-solid fa-trash">
+            </i>
+            Delete Program
+        </button>
+    </form>
      
-     <a class="view-program" href="{% url 'program' slug=bounty.slug %}">
-      <i class="fas fa-solid fa-pen">
-      </i>
-      Update Program
-     </a>
     </div>
    </div>
    {% endfor %}
+   {% else %}
+   <div class="no-bounties-message">
+    No bounties available to delete.
+  </div>
+   {% endif %}
    
    </div>
   </div>

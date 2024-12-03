@@ -692,7 +692,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="/pages/admin-grid" class="waves-effect">Delete Bounties
+                  <a href="{% url 'delete_bounty' %}" class="waves-effect" id="delete_bounty" >Delete Bounties
                     <i class="material-icons">delete_sweep</i>
                   </a>
                 </li>
@@ -1064,6 +1064,34 @@
       });
     });
 
+//delete
+
+var deletebountyUrl = "{% url 'delete_bounty' %}"; // Render the URL here
+    $(document).ready(function () {
+      // Add Bounty button click handler
+      $('#delete_bounty').click(function (event) {
+        event.preventDefault(); // Prevent default link behavior
+
+        // AJAX request to load the add_bounty template dynamically
+        $.ajax({
+          url: deletebountyUrl, // Use the variable containing the URL
+          type: 'GET',
+          success: function (data) {
+            // Inject the form HTML into the page
+            $('#dynamic-body').html(data); // Replace content of dynamic-body
+            $('#overlay').show(); // Show the modal overlay (if you have one)
+          },
+          error: function () {
+            alert('Failed to load the delete Bounty form.');
+          }
+        });
+      });
+
+      // Close modal logic
+      $(document).on('click', '#closeButton, #cancelButton', function () {
+        $('#overlay').hide(); // Hide the overlay when cancel/close is clicked
+      });
+    });
   </script>
 
 <div class="footer">
