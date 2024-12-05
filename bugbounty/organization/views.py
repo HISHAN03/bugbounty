@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect,get_object_or_404
+from django.http import HttpResponseForbidden
 from .forms import OrganizationLoginForm,OrganizationRegistrationForm,BountyCreationForm
 from .models import Organization,Bounty
 from django.contrib.auth.hashers import make_password,check_password
@@ -96,6 +97,7 @@ def org_auth(request):
             if signup_form.is_valid():
                 user = signup_form.save(commit=False)
                 user.save()
+                messages.success(request,"Your account has been created successfully. Please wait for admin approval.")
                 return redirect('org_auth')
     else:
         login_form = OrganizationLoginForm()
@@ -144,6 +146,26 @@ def bounties(request):
     if request.method =='GET':
         bounties=Bounty.objects.filter(organization_id=request.session['organization_id'])
         return render(request,'org_bounties.html',{"bounties":bounties})
+
+@org_required
+def update_bounties(request):
+    if request.method =='GET':
+        bounties=Bounty.objects.filter(organization_id=request.session['organization_id'])
+        return render(request,'update_bounty.html',{"bounties":bounties})
+
+@org_required
+def delete_bounties(request):
+    if request.method =='GET':
+        bounties=Bounty.objects.filter(organization_id=request.session['organization_id'])
+        return render(request,'delete_bounty.html',{"bounties":bounties})
+    
+    if request.method =='POST':
+        bounty_id=request.POST.get('bounty_id')
+        if bounty_id:
+            bounty=get_object_or_404(Bounty,id=bounty_id,organization_id=request.session['organization_id'])
+            bounty.delete()
+            return redirect('organization_dashboard')
+        return HttpResponseForbidden("Invalid request.")
 
 @org_required
 def program(request,slug):

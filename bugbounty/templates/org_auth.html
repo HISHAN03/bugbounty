@@ -9,6 +9,17 @@
     <title>Login & Signup</title>
 </head>
 <body>
+    {% if messages %}
+    <div class="message-container">
+        {% for message in messages %}
+            <div class="message {{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+
     <div class="container" id="container">
         <!-- Signup Form -->
         <div class="form-container sign-up-container">

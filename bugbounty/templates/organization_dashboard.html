@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="{% static 'css/org_dashboard.css' %}">
   <script src="{% static 'js/org_dashboard.js' %}" defer></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
   {% load bootstrap5 %}
   {% bootstrap_css %}
   {% bootstrap_javascript %}
@@ -663,7 +665,7 @@
     <ul id="sidenav-left" class="sidenav sidenav-fixed bg-white">
       <li>
         <a href="/pages/admin-dashboard" class="logo-container">
-          {{ org.company_name }}<i class="material-icons left">spa</i>
+          {{ org.company_name }}<i class="material-icons left">apartment</i>
         </a>
       </li>
       <li class="no-padding">
@@ -676,29 +678,29 @@
               <ul>
                 <li>
                   <a href="{% url 'Bounties' %}" class="waves-effect " id="Bounties">Bounties
-                    <i class="material-icons">web</i>
-                  </a>
-                </li>
-                <li>
-                  <a href="{% url 'add_bounty' %}" class="waves-effect " id="add_bounty">Add Bounty
-                    <i class="material-icons">web</i>
-                  </a>
-                </li>
-                <li>
-                  <a href="/pages/admin-fixed-chart" class="waves-effect">Update bounties
                     <i class="material-icons">list</i>
                   </a>
                 </li>
                 <li>
-                  <a href="/pages/admin-grid" class="waves-effect">Delete Bounties
-                    <i class="material-icons">dashboard</i>
+                  <a href="{% url 'add_bounty' %}" class="waves-effect " id="add_bounty">Add Bounty
+                    <i class="material-icons">add_box</i>
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'update_bounty' %}" class="waves-effect" id="update_bounty">Update bounties
+                    <i class="material-icons">edit_note</i>
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'delete_bounty' %}" class="waves-effect" id="delete_bounty" >Delete Bounties
+                    <i class="material-icons">delete_sweep</i>
                   </a>
                 </li>
               </ul>
             </div>
 
             <a href="{% url 'org_logout' %}">logout
-
+              <i class="material-icons">logout</i>
             </a>
           </li>
         </ul>
@@ -901,8 +903,8 @@
       </div>
     </div>
     {% endblock %}
-    </div>
-    </div>
+    
+    
   </main>
 
 
@@ -947,7 +949,7 @@
   </footer> -->
 
 
-  {% include 'footer.html' %}
+  
 
   <!-- Scripts -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -1009,7 +1011,32 @@
         $('#overlay').hide(); // Hide the overlay when cancel/close is clicked
       });
     });
+    var updateBountyUrl = "{% url 'update_bounty' %}"; // Render the URL here
+    $(document).ready(function () {
+      // Add Bounty button click handler
+      $('#update_bounty').click(function (event) {
+        event.preventDefault(); // Prevent default link behavior
 
+        // AJAX request to load the add_bounty template dynamically
+        $.ajax({
+          url:updateBountyUrl, // Use the variable containing the URL
+          type: 'GET',
+          success: function (data) {
+            // Inject the form HTML into the page
+            $('#dynamic-body').html(data); // Replace content of dynamic-body
+            $('#overlay').show(); // Show the modal overlay (if you have one)
+          },
+          error: function () {
+            alert('Failed to load the update Bounty form.');
+          }
+        });
+      });
+
+      // Close modal logic
+      $(document).on('click', '#closeButton, #cancelButton', function () {
+        $('#overlay').hide(); // Hide the overlay when cancel/close is clicked
+      });
+    });
     var BountiesUrl = "{% url 'Bounties' %}"; // Render the URL here
     $(document).ready(function () {
       // Add Bounty button click handler
@@ -1037,8 +1064,45 @@
       });
     });
 
+//delete
+
+var deletebountyUrl = "{% url 'delete_bounty' %}"; // Render the URL here
+    $(document).ready(function () {
+      // Add Bounty button click handler
+      $('#delete_bounty').click(function (event) {
+        event.preventDefault(); // Prevent default link behavior
+
+        // AJAX request to load the add_bounty template dynamically
+        $.ajax({
+          url: deletebountyUrl, // Use the variable containing the URL
+          type: 'GET',
+          success: function (data) {
+            // Inject the form HTML into the page
+            $('#dynamic-body').html(data); // Replace content of dynamic-body
+            $('#overlay').show(); // Show the modal overlay (if you have one)
+          },
+          error: function () {
+            alert('Failed to load the delete Bounty form.');
+          }
+        });
+      });
+
+      // Close modal logic
+      $(document).on('click', '#closeButton, #cancelButton', function () {
+        $('#overlay').hide(); // Hide the overlay when cancel/close is clicked
+      });
+    });
   </script>
 
+<div class="footer">
+  <div class="footer-content">
+      <span>© eyeqdotnet</span>
+      <a href="#" class="underline">Legal notices</a>
+      <a href="#">General Conditions of Use</a>
+      <a href="#">Platform privacy policy</a>
+      <a href="#" class="external-link">Contact us <i class="fas fa-external-link-alt"></i></a>
+  </div>
+</div>
 
 </body>
 

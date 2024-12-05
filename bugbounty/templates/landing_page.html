@@ -1,12 +1,99 @@
-<!DOCTYPE html>
-<html lang="en">
+{% load static %}
+<html lang="en"></html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>EyeQ Dot Net</title>
+    {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .left-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .right-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .right-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .btn-custom {
+            background-color: #333333;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        .btn-custom:hover {
+            background-color: #555555;
+        }
+        .footer-links {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #1a1a1a;
+        }
+        .footer-links a {
+            color: #888888;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+    </style>
 </head>
 <body>
-    <a href="">Bounter</a>
-    <a href="">organization</a>
+    <div class="container">
+        <div class="row w-100">
+            <div class="col-md-6 left-section">
+                <h1 class="mb-4">
+                    <span style="color: #eb2112;">EyeQ-Dot-Net</span>
+                </h1>
+                <h2 class="mb-4">Are you a customer or a researcher?</h2>
+                <div>
+                    <a href="{% url 'org_auth' %}"><button class="btn btn-custom">Customer</button></a>
+                    <a href="{% url 'user_auth' %}"><button href="" class="btn btn-custom">Researcher</button></a>
+                    
+                </div>
+            </div>
+            <div class="col-md-6 right-section">
+                <img alt="Poster" src="{% static 'images/landing_page_poster.svg' %}" />
+            </div>
+        </div>
+    </div>
+    <div class="footer-links">
+        <a href="#">Terms &amp; Conditions</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Security</a>
+        <a href="#">Do Not Sell My Information</a>
+    </div>
 </body>
 </html>
