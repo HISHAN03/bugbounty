@@ -7,6 +7,7 @@ urlpatterns = [
       path('dashboard/',views.organization_dashboard,name='organization_dashboard'),
       path('dashboard/Bounties',views.bounties,name='Bounties'),
       path('dashboard/Update-Bounties',views.update_bounties,name='update_bounty'),
+      path('dashboard/Update-Bounty/<id>',views.update_bounty,name='update_view'),
       path('dashboard/Delete-Bounties',views.delete_bounties,name='delete_bounty'),
       path('auth/',views.org_auth,name='org_auth'),
       # path('dashboard/Add-Bounty',views.create_bounty,name='create_bounty'),

@@ -118,6 +118,8 @@ def add_bounty(request):
         if form.is_valid():
             bounty = form.save(commit=False)
             print(bounty)
+            scopes=request.POST.getlist('scopes[]')
+            bounty.scopes=scopes
             bounty.organization = request.organization  # Link bounty to the logged-in organization
             bounty.save()
             return redirect('organization_dashboard')  # Redirect to a success page or bounty list
@@ -152,6 +154,27 @@ def update_bounties(request):
     if request.method =='GET':
         bounties=Bounty.objects.filter(organization_id=request.session['organization_id'])
         return render(request,'update_bounty.html',{"bounties":bounties})
+
+@org_required
+def update_bounty(request,id):
+    bounty=get_object_or_404(Bounty,id=id)
+    if request.method=='GET':
+        form = BountyCreationForm(instance=bounty)
+        return render(request,'update_view.html',{"bounty":bounty,'form':form})
+    
+    if request.method == "POST":
+        form = BountyCreationForm(request.POST,instance=bounty)
+        if form.is_valid():
+            form.save()
+            return redirect('organization_dashboard')
+    else:
+        form =BountyCreationForm(instance=bounty)
+    return render(request,'update_view.html',{'form':form,'bounty':bounty})    
+
+    
+    
+
+
 
 @org_required
 def delete_bounties(request):

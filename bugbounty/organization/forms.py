@@ -54,7 +54,8 @@ class BountyCreationForm(forms.ModelForm):
     Title = forms.CharField(
         widget=forms.TextInput(attrs={
             'placeholder': 'Title',  # Add placeholder here
-            'class': 'form-control'         # Add your custom CSS class
+            'class': 'form-control',
+            'value': '',        # Add your custom CSS class
         })
     )
     description = forms.CharField(
@@ -63,11 +64,14 @@ class BountyCreationForm(forms.ModelForm):
             'class': 'form-control'         # Add your custom CSS class
         })
     )
-    url = forms.URLField(
-        widget=forms.URLInput(attrs={
+    scopes = forms.CharField(
+        widget=forms.Textarea(attrs={
             'placeholder': 'https://example.com',  # Add placeholder here
-            'class': 'form-control'         # Add your custom CSS class
-        })
+            'class': 'form-control',
+            
+                     # Add your custom CSS class
+        }),
+        required=False
     )
     min_reward = forms.IntegerField(
         widget=forms.NumberInput(attrs={
@@ -99,4 +103,4 @@ class BountyCreationForm(forms.ModelForm):
     )
     class Meta:
         model = Bounty
-        fields = ['Title', 'description','url', 'min_reward', 'max_reward', 'start_date', 'end_date']
+        fields = ['Title', 'description','scopes', 'min_reward', 'max_reward', 'start_date', 'end_date']
