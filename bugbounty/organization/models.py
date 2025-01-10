@@ -29,6 +29,7 @@ class Bounty(models.Model):
     status=models.BooleanField(default=True)
     start_date=models.DateField()
     end_date=models.DateField()
+    scopes=models.JSONField(default=list,blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
