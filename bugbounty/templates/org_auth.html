@@ -10,7 +10,7 @@
 </head>
 <body>
     {% if messages %}
-    <div class="message-container">
+    <div class="message-container" style="display: contents;">
         {% for message in messages %}
             <div class="message {{ message.tags }}">
                 {{ message }}

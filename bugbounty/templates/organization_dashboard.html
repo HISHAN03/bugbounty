@@ -198,14 +198,14 @@
 
     <ul id="sidenav-left" class="sidenav sidenav-fixed bg-white">
       <li>
-        <a href="/pages/admin-dashboard" class="logo-container">
+        <a href="{% url 'organization_dashboard' %}" class="logo-container">
           {{ org.company_name }}<i class="material-icons left">apartment</i>
         </a>
       </li>
       <li class="no-padding">
         <ul class="collapsible collapsible-accordion">
           <li class="bold waves-effect active">
-            <a class="collapsible-header">Programs
+            <a class="collapsible-header">Menu
               <i class="material-icons chevron">chevron_left</i>
             </a>
             <div class="collapsible-body">
@@ -232,7 +232,7 @@
                 </li>
               </ul>
             </div>
-
+            <hr>
             <a href="{% url 'org_logout' %}">logout
               <i class="material-icons">logout</i>
             </a>
@@ -495,7 +495,7 @@ var deletebountyUrl = "{% url 'delete_bounty' %}"; // Render the URL here
     });
   </script>
 
-<div class="footer">
+<!-- <div class="footer">
   <div class="footer-content">
       <span>© eyeqdotnet</span>
       <a href="#" class="underline">Legal notices</a>
@@ -503,7 +503,7 @@ var deletebountyUrl = "{% url 'delete_bounty' %}"; // Render the URL here
       <a href="#">Platform privacy policy</a>
       <a href="#" class="external-link">Contact us <i class="fas fa-external-link-alt"></i></a>
   </div>
-</div>
+</div> -->
 
 </body>
 

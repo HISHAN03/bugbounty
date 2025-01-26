@@ -78,14 +78,25 @@ WSGI_APPLICATION = 'bugbounty.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+# sqlite
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+   'default': {
+       'ENGINE': 'django.db.backends.postgresql',
+       'NAME': 'bugbounty',
+       'USER': 'development',
+       'PASSWORD': 'development',
+       'HOST': 'localhost',
+       'PORT': '5432',
+   }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -163,3 +174,12 @@ AUTHENTICATION_BACKENDS=[
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE=True
+# SECURE_SSL_REDIRECT=True
+# SECURE_BROWSER_XSS_FILTER = True
+# SECURE_CONTENT_TYPE_NOSNIFF = True
+# SECURE_HSTS_SECONDS = 31536000  # 1 year
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_PRELOAD = True
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
+# X_FRAME_OPTIONS = 'DENY'

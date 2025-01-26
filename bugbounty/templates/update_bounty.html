@@ -1,88 +1,118 @@
 <html>
- <head>
-  <title>
-   Update Bounties
-  </title>
+<head>
+  <title>Update Bounties</title>
   {% load bootstrap5 %}
   {% bootstrap_css %}
   {% bootstrap_javascript %}
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <style>
-   body {
-            background-color: #f5f5f5;
-        }
-        .container {
-            margin-top: 20px;
-        }
-        .card {
-            border: none;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .card-body {
-            display: flex;
-            align-items: center;
-        }
-        .card-body img {
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            margin-right: 20px;
-        }
-        .card-body .info {
-            flex-grow: 1;
-        }
-        .card-body .info h5 {
-            margin: 0;
-            font-size: 1.25rem;
-            font-weight: bold;
-        }
-        .card-body .info p {
-            margin: 0;
-            color: #666;
-        }
-        .card-body .view-program {
-            color: #007bff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .card-body .view-program i {
-            margin-right: 5px;
-        }
+    body {
+      background-color: #f5f5f5;
+    }
+    .container {
+      margin-top: 20px;
+    }
+    .card {
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .card-body {
+      display: flex;
+      align-items: center;
+    }
+    .card-body img {
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      margin-right: 20px;
+    }
+    .card-body .info {
+      flex-grow: 1;
+    }
+    .card-body .info h5 {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+    .card-body .info p {
+      margin: 0;
+      color: #666;
+    }
+    .card-body .view-program {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .card-body .view-program i {
+      margin-right: 5px;
+    }
   </style>
- </head>
- <body>
+</head>
+<body>
   <div class="container">
-   <h2 class="text-center mb-4">
-    Update Bounties
-   </h2>
-   {% for bounty in bounties %}
-   <div class="card">
-    <div class="card-body">
-     <img alt="Logo of Organization 1" height="60" src="https://storage.googleapis.com/a1aa/image/koj5wdZMvOJnKhKNkNre3xiyOHrkQSK1fApaaXFcsoQvdfmnA.jpg" width="60"/>
-     <div class="info">
-      <h5>
-       {{bounty.Title}}
-      </h5>
-      <p>
-       {{bounty.description}}
-      </p>
-     </div>
-     
-     <a class="view-program" href="{% url 'update_view' id=bounty.id %}">
-      <i class="fas fa-solid fa-pen">
-      </i>
-      Edit Program
-     </a>
+    <div class="dynamic_area">
+      <h2 class="text-center mb-4">
+        Update Bounties
+      </h2>
+      {% for bounty in bounties %}
+        <div class="card">
+          <div class="card-body">
+            <img alt="Logo of Organization 1" height="60" src="https://storage.googleapis.com/a1aa/image/koj5wdZMvOJnKhKNkNre3xiyOHrkQSK1fApaaXFcsoQvdfmnA.jpg" width="60"/>
+            <div class="info">
+              <h5>{{ bounty.Title }}</h5>
+              <p>{{ bounty.description }}</p>
+            </div>
+            <!-- Assign a unique ID to each "Edit Program" button -->
+            <a class="view-program" href="#" data-url="{% url 'update_view' id=bounty.id %}">
+              <i class="fas fa-solid fa-pen"></i> Edit Program
+            </a>
+          </div>
+        </div>
+      {% endfor %}
     </div>
-   </div>
-   {% endfor %}
-   
-   </div>
   </div>
 
+  <!-- This container is where the update form will be injected -->
+  <div id="dynamic_area"></div>
 
-  
- </body>
+  <!-- Scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      // Handle the Edit Program link click event
+      $('.view-program').on('click', function (event) {
+        event.preventDefault(); // Prevent default link behavior
+
+        // Get the URL from the data-url attribute
+        const updateBountyUrl = $(this).data('url');
+
+        // Hide the existing bounty list and show the form area
+        $('.dynamic_area').hide();  // Hide the existing bounty list
+        
+        // Clear the current content in #dynamic_area before injecting new form
+        $('#dynamic_area').html(''); // Clears the existing content
+
+        // Make the AJAX request
+        $.ajax({
+          url: updateBountyUrl,
+          type: 'GET',
+          success: function (data) {
+            // Inject the new form HTML into the #dynamic_area container
+            $('#dynamic_area').html(data); // This should replace the content
+
+            // Now show the form area again
+            $('#dynamic_area').show();
+          },
+          error: function () {
+            alert('Failed to load the update bounty form.');
+          }
+        });
+      });
+    });
+  </script>
+</body>
 </html>
