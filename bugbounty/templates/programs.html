@@ -19,7 +19,7 @@
                     
                 </div>
                 <div class="title">{{ bounty.Title }}</div>
-                <div class="subtitle">Bug Bounty Post - Securing Digital Trust</div>
+                <!-- <div class="subtitle">Bug Bounty</div> -->
             </div>
             <div class="actions">
                 <button class="button">SUBMIT REPORT</button>
@@ -75,6 +75,21 @@
             </div>
         </div>
     </div>
+    <div class="container">
+        <div class="description">
+            <div class="title">Scopes:</div>
+        </div>
+        <div class="">
+            {% for scope in bounty.scopes%}
+            
+            <input type="text" value="{{scope}}" readonly>
+            <br>
+
+            {% endfor %}
+            
+        </div>
+    </div>
+    
     {% endfor %}
 </body>
 </html>

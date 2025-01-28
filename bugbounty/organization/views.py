@@ -68,7 +68,8 @@ def org_auth(request):
                 password = login_form.cleaned_data['password']
                 try:
                     org = Organization.objects.get(email=email)
-                
+                    
+                    
                 # Debugging output
                     print("Stored password in database:", org.password)
                     print("Entered password:", password)
@@ -89,6 +90,8 @@ def org_auth(request):
                         print("invalid")
                 except Organization.DoesNotExist:
                     login_form.add_error(None, "Invalid email or password.")
+                    messages.error(request,"Invalid email or password.")
+                    
                     
                     
         elif action == 'signup':
@@ -165,6 +168,10 @@ def update_bounty(request,id):
     if request.method == "POST":
         form = BountyCreationForm(request.POST,instance=bounty)
         if form.is_valid():
+            new_scopes = request.POST.getlist('scopes[]')  
+            existing_scopes = bounty.scopes or []  
+            updated_scopes = list(set(existing_scopes + new_scopes)) 
+            bounty.scopes = updated_scopes
             form.save()
             return redirect('organization_dashboard')
     else:

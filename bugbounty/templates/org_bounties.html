@@ -54,6 +54,7 @@
  </head>
  <body>
   <div class="container">
+    <div class="dynamic_area">
    <h2 class="text-center mb-4">
     Bounty Listings
    </h2>
@@ -70,7 +71,7 @@
       </p>
      </div>
      
-     <a class="view-program" href="{% url 'program' slug=bounty.slug %}">
+     <a class="view-program" href="#" data-url="{% url 'program' slug=bounty.slug %}">
       <i class="fas fa-external-link-alt">
       </i>
       View Program
@@ -78,60 +79,38 @@
     </div>
    </div>
    {% endfor %}
-   <div class="card">
-    <div class="card-body">
-     <img alt="Logo of Organization 2" height="60" src="https://storage.googleapis.com/a1aa/image/BOfUZ9jXa00QRKcM1oRej7y5LZp55DNfxgeUyGeBwikKu7beE.jpg" width="60"/>
-     <div class="info">
-      <h5>
-       Organization 2
-      </h5>
-      <p>
-       Bounty Description for Organization 2
-      </p>
-     </div>
-     <a class="view-program" href="#">
-      <i class="fas fa-external-link-alt">
-      </i>
-      View Program
-     </a>
-    </div>
+   
    </div>
-   <div class="card">
-    <div class="card-body">
-     <img alt="Logo of Organization 3" height="60" src="https://storage.googleapis.com/a1aa/image/SAuB2a7IIpKFDlM1odngnlpGIUgTH4M2iK64qriWWsFb338E.jpg" width="60"/>
-     <div class="info">
-      <h5>
-       Organization 3
-      </h5>
-      <p>
-       Bounty Description for Organization 3
-      </p>
-     </div>
-     <a class="view-program" href="#">
-      <i class="fas fa-external-link-alt">
-      </i>
-      View Program
-     </a>
-    </div>
-   </div>
-   <div class="card">
-    <div class="card-body">
-     <img alt="Logo of Organization 4" height="60" src="https://storage.googleapis.com/a1aa/image/f5bex3UcHPsbp06qMYjsAbdDd7neJV4PeB5aOElRGso429NPB.jpg" width="60"/>
-     <div class="info">
-      <h5>
-       Organization 4
-      </h5>
-      <p>
-       Bounty Description for Organization 4
-      </p>
-     </div>
-     <a class="view-program" href="#">
-      <i class="fas fa-external-link-alt">
-      </i>
-      View Program
-     </a>
-    </div>
-   </div>
-  </div>
+</div>  
+</div>
+<div id="dynamic_area"></div>
+  <script>
+
+$(document).ready(function () {
+      
+      $('.view-program').on('click', function (event) {
+        event.preventDefault(); 
+      
+        const BountyUrl = $(this).data('url');
+
+        
+        $('.dynamic_area').hide(); 
+        $('#dynamic_area').html('');
+        $.ajax({
+          url: BountyUrl,
+          type: 'GET',
+          success: function (data) {
+           
+            $('#dynamic_area').html(data); 
+            $('#dynamic_area').show();
+          },
+          error: function () {
+            alert('Failed to load the bounty.');
+          }
+        });
+      });
+    });
+
+  </script>
  </body>
 </html>
